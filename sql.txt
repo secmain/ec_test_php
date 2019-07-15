@@ -1,0 +1,99 @@
+alter table mst_tbl add column prof_file_name varchar(50);
+alter table mst_tbl add column prof_file_path varchar(50);
+
+create database ec_test_php;
+use ec_test_php;
+create table mst_tbl(
+	code int(5) primary key auto_increment,
+	name varchar(16) not null unique,
+	password varchar(32) not null,
+);
+alter table mst_tbl add column kanrish_flg tinyint(1) not null;
+
+
+#ペネトレサンプル用
+create table user(
+	code int(5) primary key auto_increment,
+	name varchar(16) not null unique,
+	password varchar(32) not null,
+	kanri_flg tinyint(1) not null
+);
+insert into user values(1, 'アルファ太郎', 'pass1234', 1);
+insert into user values(2, '山田太郎', '5555', 0);
+insert into user values(3, '鈴木', '1234', 0);
+insert into user values(4, '田中イチロウ', 'pentest', 1);
+insert into user values(5, '伊藤二郎', 'testtest', 0);
+insert into user values(6, '本田サブロウ', '1234', 0);
+
+create table pro_category(
+	id int(2) auto_increment primary key,
+	text varchar(100) not null
+);
+
+insert into pro_category values(1, 'お肉');
+insert into pro_category values(2, '果物');
+insert into pro_category values(3, '野菜');
+
+create table mst_product(
+	code int(11) auto_increment primary key,
+	name varchar(50) not null,
+	price int(11) not null,
+	file_name varchar(50),
+	file_path varchar(50)
+);
+
+
+alter table mst_product add column category int(2) not null;
+alter table mst_product add column datetime datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+#サンプルデータ
+insert into mst_product(name, price) values('apple', 500);
+insert into mst_product(name, price) values('melon', 2500);
+insert into mst_product(name, price) values('lemon', 100);
+
+create table order_tbl(
+	code int(8) primary key auto_increment,
+	date timestamp,
+	code_member int not null,
+	name varchar(15) not null,
+	email varchar(50) not null,
+	postal1 varchar(3) not null,
+	postal2 varchar(4) not null,
+	address varchar(50) not null,
+	tel varchar(13) not null
+);
+
+#サンプルデータ
+insert into order_tbl(code_member, name, email, postal1, postal2, address, tel) values(1, 'first order', 'testtesttes@aa.cc.jj.asde', '111', '1111', 'tokyo', '00-1111-2222');
+insert into order_tbl(code_member, name, email, postal1, postal2, address, tel) values(2, 'third order', 'testtesttes3@aa.cc.jj.asde', '333', '3333', 'oosaka', '00-1111-4444');
+insert into order_tbl(code_member, name, email, postal1, postal2, address, tel) values(1, 'second order', 'testtesttes2@aa.cc.jj.asde', '222', '2222', 'shizuoka', '00-1111-3333');
+
+create table order_product_tbl(
+	code int(8) primary key auto_increment,
+	code_sale int not null,
+	code_product int not null,
+	price int(10),
+	quantity int 
+);
+
+alter table order_product_tbl drop column price;
+
+#サンプルデータ
+insert into order_product_tbl(code_sale, code_product, quantity) values(1, 1, 2);
+insert into order_product_tbl(code_sale, code_product, quantity) values(1, 2, 2);
+insert into order_product_tbl(code_sale, code_product, quantity) values(2, 1, 1);
+
+
+create table order_member(
+	code int(8) primary key auto_increment,
+	date timestamp,
+	password varchar(32) not null,
+	name varchar(15) not null,
+	email varchar(50) not null,
+	postal1 varchar(3) not null,
+	postal2 varchar(4) not null,
+	address varchar(50) not null,
+	tel varchar(13) not null,	
+	danjo int not null,
+	birth int not null	
+);

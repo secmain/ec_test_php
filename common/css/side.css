@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+.sidebar {
+	width: 10%;
+	background-color: red;
+	float: right;
+}
+
+.sidebar ul {
+	list-style: none;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.sidebar ul li {
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	margin-right: 2px;
+	transition: 0.2s;
+}
+
+.sidebar ul li:hover {
+	background-color: blue;
+}
+
+.sidebar ul li a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+}

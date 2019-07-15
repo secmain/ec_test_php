@@ -1,0 +1,43 @@
+.main-container {
+	width: 80%;
+	background-color: #fff;
+	padding: 25px;
+	padding-top: 10px;
+	float: left;
+	margin: auto;
+}
+
+.main-title {
+	text-align: center;
+	padding: 0;
+	margin: 5px;
+}
+
+.form {
+}
+
+.kaiin-zone {
+	height: 450px;
+	margin-bottom: 10px;
+	overflow-y: auto;
+}
+
+.kaiin-list-form {
+	margin: auto;
+	text-align: center;
+	padding-left: 10%;
+}
+
+
+.kaiin-box {
+	width: 50%;
+	height: 200px;
+	margin: 15px 0px;
+	float: left;
+}
+
+.kaiin-image {
+	width: 80%;
+	height: 150px;
+	margin: 0 auto;
+}

@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+.main-container {
+	float: left;
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;	
+}
+
+.main-title {
+	margin-bottom: 0px;
+}
+
+.form-table {
+	width: 70%;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.form-table  tr {
+  border-bottom: solid 2px white;
+}
+
+.form-table tr:last-child {
+  border-bottom: none;
+}
+
+.form-table th {
+  position: relative;
+  text-align: left;
+  width: 40%;
+  background-color: #52c2d0;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 1rem;
+}
+
+.form-table td {
+  width: 60%;
+  text-align: center;
+  background-color: #eee;
+  padding: 10px 0;
+}

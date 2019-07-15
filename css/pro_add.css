@@ -1,0 +1,39 @@
+.main-container {
+	width: 80%;
+	background-color: #fff;
+	padding: 25px;
+	padding-top: 10px;
+	float: left;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.main-title {
+	text-align: center;
+	padding: 0;
+	margin: 5px;
+}
+
+.pro-add-form {
+	padding-left: 5%;
+	padding-top: 20px;
+}
+
+.pro-add-form input {
+	margin-bottom: 50px;
+}
+
+.pro-img-file {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  height: 200px; 
+}
+
+.image-zone {
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  overflow: hidden;
+  margin: 0 auto;  
+}

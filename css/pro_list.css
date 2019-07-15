@@ -1,0 +1,51 @@
+.main-container {
+	width: 80%;
+	background-color: #fff;
+	padding: 25px;
+	padding-top: 10px;
+	float: left;
+	margin: auto;
+}
+
+.main-title {
+	text-align: center;
+	padding: 0;
+	margin: 5px;
+}
+
+.form {
+}
+
+.products {
+	overflow-y: auto;
+	margin: 0 auto;
+	width: 90%;
+	height: 500px;
+	margin-bottom: 15px;
+	background-color: #fff8dc;
+}
+
+.pro-list-form {
+	margin: auto;
+	text-align: center;
+	padding-left: 10%;
+}
+
+.product {
+	width: 50%;
+	height: 200px;
+	margin: 15px 0px;
+	word-wrap: break-word;
+	float: left;
+}
+
+.product-image {
+	width: 90%;
+	height: 150px;
+	margin: 0 auto;
+}
+
+
+.category-select {
+	margin-bottom: 15px;
+}

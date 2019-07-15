@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+.main-container {
+	width: 80%;
+	margin: 0 auto;
+	background-color: white;
+}
+
+.link-table {
+	width: 100%;
+	text-align: center;
+	border-radius: 4px;
+}
+
+.link-box {
+	transition: opacity 0.5s;
+}
+
+.link-box a {
+	text-decoration: none;
+	transition: color 5s;
+}
+
+.link-box:hover {
+	opacity: 0.5;
+}
+
+.link-box a:visited {
+	color: #0000ff;
+}
+
+.link-box:hover a {
+	color: #dc143c;
+}
+
+.link-text {
+	font-size: 1.2rem;
+}
+
+.fa-custom-em {
+	font-size: 12em;
+}
