@@ -89,7 +89,7 @@ create table order_member(
 	date timestamp,
 	password varchar(32) not null,
 	name varchar(15) not null,
-	email varchar(50) not null,
+	email varchar(50) unique not null,
 	postal1 varchar(3) not null,
 	postal2 varchar(4) not null,
 	address varchar(50) not null,

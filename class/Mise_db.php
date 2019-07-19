@@ -18,11 +18,11 @@ class Mise_db {
 
 	function login_check($id, $password) {
 		$sql = 'select code, name from order_member where email = ? and password = ?';
-		$stmt = $db->prepare($sql);
+		$stmt = $this->db->prepare($sql);
 		$data = [$id, $password];
 		$stmt->execute($data);
 
-		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
 	function get_shohins($order = null) {
@@ -90,9 +90,9 @@ class Mise_db {
 		return $ret;
 	}
 
-	function get_order($id) {
-		$sql = 'select * from order_tbl where code = ?';
-		$stmt = $dbh->prepare($sql);
+	function get_member($id) {
+		$sql = 'select * from order_member where code = ?';
+		$stmt = $this->db->prepare($sql);
 		$stmt->execute([$id]);
 
 		return $stmt->fetch(PDO::FETCH_ASSOC);

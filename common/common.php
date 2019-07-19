@@ -66,15 +66,21 @@
 		$mise_dir = $project . 'mise/';
 		
 		$path_list = [
-			0 => [$project . 'kaiin_top.php' => ['name' => 'トップページ', 'parent' => '']],
+			0 => [$project . 'kaiin_top.php' => ['name' => 'トップページ', 'parent' => ''],
+				  // ショップ商品一覧
+				  $mise_dir . 'mise_list.php' => ['name' => '商品一覧', 'parent' => $project . 'kaiin_top.php'],],
 			1 => [$kaiin_dir . 'kaiin_list.php' => ['name' => '会員一覧', 'parent' => $project . 'kaiin_top.php'],
 				  $mypage_dir . 'kaiin_edit_mypage.php' => ['name' => 'myページ', 'parent' => $project . 'kaiin_top.php'],
 				  $product_dir . 'pro_list.php' => ['name' => '商品一覧', 'parent' => $project . 'kaiin_top.php'],
 				  $order_dir . 'order_download.php' => ['name' => '注文書ダウンロード日付選択', 'parent' => $project . 'kaiin_top.php'],
 				  // お問い合わせ
 				  $contact_dir . 'contact.php' => ['name' => 'お問い合わせ', 'parent' => $project . 'kaiin_top.php'],
-				  // ショップ商品一覧
-				  $mise_dir . 'mise_list.php' => ['name' => '商品一覧', 'parent' => $project . 'kaiin_top.php'],
+				  // カート
+				  $mise_dir . 'mise_cartlook.php' => ['name' => 'カート', 'parent' => $mise_dir . 'mise_list.php'],
+				  // 購入手続き
+				  $mise_dir . 'mise_form.php' => ['name' => '購入手続き', 'parent' => $mise_dir . 'mise_list.php'],
+				  // 商品詳細
+				  $mise_dir . 'mise_product.php' => ['name' => '商品詳細', 'parent' => $mise_dir . 'mise_list.php'],
 				 ],
 			2 => [$kaiin_dir . 'kaiin_edit.php' => ['name' => '会員編集', 'parent' => $kaiin_dir . 'kaiin_list.php'],
 				  $mypage_dir . 'kaiin_edit_mypage_check.php' => ['name' => 'myページ編集確認', 'parent' => $mypage_dir . 'kaiin_edit_mypage.php'],
@@ -87,10 +93,8 @@
 				  $order_dir . 'order_download_done.php' => ['name' => '注文書ダウンロード', 'parent' => $order_dir . 'order_download.php'],
 				  // お問い合わせ確認
 				  $contact_dir . 'contact_check.php' => ['name' => 'お問い合わせ確認', 'parent' => $contact_dir . 'contact.php'],
-				  // カート
-				  $mise_dir . 'mise_cartlook.php' => ['name' => 'カート', 'parent' => $mise_dir . 'mise_list.php'],
-				  // 購入手続き
-				  $mise_dir . 'mise_form.php' => ['name' => '購入手続き', 'parent' => $mise_dir . 'mise_list.php'],
+				  // 購入手続き確認
+				  $mise_dir . 'mise_form_check.php' => ['name' => '購入手続き確認', 'parent' => $mise_dir . 'mise_form.php'],
 				],
 			3 => [$kaiin_dir . 'kaiin_edit_check.php' => ['name' => '会員編集確認', 'parent' => $kaiin_dir . 'kaiin_edit.php'],
 				  $kaiin_dir . 'kaiin_add_check.php' => ['name' => '会員追加確認', 'parent' => $kaiin_dir . 'kaiin_add.php'],
@@ -102,16 +106,14 @@
 				  $product_dir . 'pro_delete_done.php' => ['name' => '商品削除完了', 'parent' => $product_dir . 'pro_delete.php'],
 				  // お問い合わせ完了
 				  $contact_dir . 'contact_done.php' => ['name' => 'お問い合わせ完了', 'parent' => $contact_dir . 'contact_check.php'],
-				  // 購入手続き
-				  $mise_dir . 'mise_form_check.php' => ['name' => '購入手続き確認', 'parent' => $mise_dir . 'mise_form.php'],
+				  // 購入手続き完了
+				  $mise_dir . 'mise_form_done.php' => ['name' => '購入手続き完了', 'parent' => $mise_dir . 'mise_form_check.php'],
 				],
 			4 => [$kaiin_dir . 'kaiin_edit_done.php' => ['name' => '会員編集完了', 'parent' => $kaiin_dir . 'kaiin_edit_check.php'],
 				  $product_dir . 'pro_edit_done.php' => ['name' => '商品編集完了', 'parent' => $product_dir . 'pro_edit_check.php'],
 				  $product_dir . 'pro_add_done.php' => ['name' => '商品追加完了', 'parent' => $product_dir . 'pro_add_check.php'],
 				  // パスワード変更完了
 				  $mypage_dir . 'kaiin_password_change_done.php' => ['name' => 'pw変更完了', 'parent' => $mypage_dir . 'kaiin_password_change_check.php'],
-				  // 購入手続き完了
-				  $mise_dir . 'mise_form_done.php' => ['name' => '購入手続き完了', 'parent' => $mise_dir . 'mise_form_check.php'],
 				],
 		];
 

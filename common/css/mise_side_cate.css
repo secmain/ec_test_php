@@ -4,7 +4,7 @@
 	width: 20%;
 	padding-bottom: 32768px;
 	margin-bottom: -32768px;
-	background-color: red;
+	background-color: #fff8dc;
 	float: left;
 	overflow: hidden;
 }
@@ -24,7 +24,7 @@
 	transition: 0.2s;
 }
 
-.cate-sidebar ul li:hover {
+.cate-sidebar .category-shohin:hover {
 	background-color: blue;
 }
 

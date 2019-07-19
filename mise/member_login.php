@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	session_regenerate_id(true);
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +13,15 @@
 	<style>
 		.main {
 			background-color: #f0f8ff;
+		}
+
+		.notlogin-btn {
+			margin-top: 20px;
+		}
+
+		.error-msg {
+			font-weight: bold;
+			color: red;
 		}
 	</style>
 </head>
@@ -25,10 +39,9 @@
 		<div class="main-container">
 			<h3 class="main-title">ログイン</h3>
 			
-			<?php if (isset($_SESSION['errors'])) { ?>
-				<div class="error-msg">メールアドレスかパスワードが間違っています</div>
-				<a href="member_login.html" class="btn">戻る</a>
-			<?php } ?>
+			<?php if (isset($_SESSION['mise_login_error'])) { ?>
+				<div class="error-msg"><?php print $_SESSION['mise_login_error']; ?></div>
+			<?php unset($_SESSION['mise_login_error']);} ?>
 			<form action="member_login_check.php" method="post">
 				<div class="input">登録メールアドレス</div>
 				<input type="text" name="email"><br>
@@ -36,9 +49,11 @@
 				<input type="password" name="password"><br>
 				<br>
 				<input type="submit" value="ログイン" class="btn">
+				<div class="notlogin-btn">
+					<input type="button" onclick="location.href='mise_list.php'" value="ログインせずに購入" class="btn">
+				</div>
 			</form>
 		</div>
 	</div>
-	<?php require_once('../common/html/footer.php'); ?>
 </body>
 </html>

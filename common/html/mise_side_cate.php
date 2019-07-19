@@ -11,7 +11,7 @@
 		print '<ul>';
 		foreach ($shohins as $j => $shohin) {
 			if ($rec['id'] == $shohin['category']) {
-				print '<a href="mise_product.php?pro_code=' . $shohin['code'] . '"><li>' . $shohin['name'] . '</li></a>';	
+				print '<a href="mise_product.php?pro_code=' . $shohin['code'] . '"><li class="category-shohin">' . $shohin['name'] . '</li></a>';	
 			}			
 		}
 		print '</ul>';

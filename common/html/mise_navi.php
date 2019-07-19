@@ -3,23 +3,23 @@
 
 	<div class="login-info">
 		<?php
-			if (isset($_SESSION['member_login']) == false) {
+			if (isset($_SESSION['member']) == false) {
 				print 'ようこそゲスト様';
 				print '<br>';
 			} else {
 				print 'ようこそ';
-				print $_SESSION['member_name'];
+				print sprintf('<a href="../mise/mise_mypage.php?code=%s">%s</a>', $_SESSION['member']['member_code'], $_SESSION['member']['member_name']);
 				print '様';
-				print '<a href="member_logout.php">ログアウト</a><br>';
 				print '<br>';
 			}
 		?>
 	</div>
 	<div class="logout">
 		<?php
-			if (isset($_SESSION['member_login'])) {
+			if (isset($_SESSION['member'])) {
 				print '<a href="' . getDomainName() . '/ec_php/mise/member_logout.php' . '">';
-		 		print '<i class="fas fa-sign-out-alt fa-2x awe-grey"></i>';
+		 		print 'ログアウト<i class="fas fa-sign-out-alt fa-2x awe-grey"></i>';
+		 		print '</a>';
 			} else {
 				print '<a href="' . getDomainName() . '/ec_php/mise/member_login.php' . '">';
 				print 'メンバーログイン<i class="fas fa-sign-out-alt fa-2x awe-grey"></i>';

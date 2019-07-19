@@ -14,6 +14,10 @@
 		.hidden-area {
 			display: none;
 		}
+
+		.ng-message {
+			margin: 20px;
+		}
 	</style>
 	<script>
 		function init() {
@@ -50,6 +54,12 @@
 			<form action="mise_form_check.php" method="post">
 				<?php
 
+					if (!isset($_SESSION['cart']) || !count($_SESSION['cart'])) {
+						print '<div class="ng-message">カートに商品が入っていません</div>';
+						print '<input type="button" onclick="history.back()" value="戻る" class="btn">';
+						exit();
+					}
+
 					$onamae = '';
 					$email = '';
 					$postal1 = '';
@@ -57,13 +67,15 @@
 					$address = '';
 					$tel = '';
 
-					$is_login = isset($_SESSION['member_login']) && $_SESSION['member_login'] == 1;
-
+					// メンバーログインチェック
+					$is_login = isset($_SESSION['member']) && $_SESSION['member']['member_login'] == 1;
+					// メンバーログイン時
 					if ($is_login) {
 
 						$mise_db = new Mise_db();
+						$member = $_SESSION['member'];
 						// メンバー情報取得
-						$rec = $mise_db->get_order($_SESSION['member_code']);
+						$rec = $mise_db->get_member($member['member_code']);
 
 						$onamae = $rec['name'];
 						$email = $rec['email'];
@@ -101,12 +113,7 @@
 						<th>電話番号</th>
 						<td><input type="text" name="tel" class="lg-input-box" value="<?php print $tel; ?>"></td>
 					</tr>
-					<tr>
-						<th>画像<br></th>
-						<td>
-							<input type="file" name="prof_file">
-						</td>
-					</tr>
+					
 					<?php if (!$is_login) { ?>
 					<tr>
 						<th></th>
@@ -120,6 +127,12 @@
 					<tr class="hidden-area">
 						<th></th>
 						<td>会員登録する方は以下の項目も入力してください。</td>
+					</tr>
+					<tr class="hidden-area">
+						<th>画像<br></th>
+						<td>
+							<input type="file" name="prof_file">
+						</td>
 					</tr>
 					<tr class="hidden-area">
 						<th>パスワード</th>

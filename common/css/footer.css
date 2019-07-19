@@ -3,5 +3,14 @@ footer {
 	width: 100%;
 	position: fixed;
 	bottom: 0;
-	background-color: orange;
+	background-color: #a9a9a9;
+	opacity: 0.8;
+}
+
+footer .content {
+	float: right;
+	padding-right: 30px;
+	font-size: 1.2rem;
+	line-height: 50px;
+	color: #f5f5dc;
 }

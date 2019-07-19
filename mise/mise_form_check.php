@@ -10,6 +10,11 @@
 	<title>商品購入確認</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
 	<link rel="stylesheet" href="../css/pro_edit.css">
+	<style>
+		.error {
+			color:red;
+		}
+	</style>
 </head>
 <body>
 	<?php
@@ -44,7 +49,7 @@
 
 				// メール改ざんの脆弱性
 				if ($onamae == '') {
-					print 'お名前が入力されていません。<br><br>';
+					print checkGamenDispFieldError('お名前が入力されていません。');
 					$ok_flg = false;
 				} else {
 					print 'お名前<br>';
@@ -54,7 +59,7 @@
 
 				// メールヘッダーインジェクション対策
 				if (preg_match('/^[\.\-\w]+@[\.\-\w]+\.([a-z]+)$/', $email) == 0) {
-					print 'メールアドレスを正確に入力してください。<br><br>';
+					print checkGamenDispFieldError('メールアドレスを正確に入力してください。');
 					$ok_flg = false;
 				} else {
 					print 'メールアドレス<br>';
@@ -63,7 +68,7 @@
 				}
 
 				if (preg_match('/^\d{3}$/', $postal1) == 0) {
-					print '郵便番号（前）は半角数字3文字で入力してください。<br><br>';
+					print checkGamenDispFieldError('郵便番号（前）は半角数字3文字で入力してください。');
 					$ok_flg = false;
 				} else {
 					print '郵便番号<br>';
@@ -72,13 +77,13 @@
 				}
 
 				if (preg_match('/^\d{4}$/', $postal2) == 0) {
-					print '郵便番号（後）は半角数字4文字で入力してください。<br><br>';
+					print checkGamenDispFieldError('郵便番号（後）は半角数字4文字で入力してください。');
 					$ok_flg = false;
 				}
 
 				// 脆弱性あり
 				if ($address == '') {
-					print '住所が入力されていません。<br><br>';
+					print checkGamenDispFieldError('住所が入力されていません。');
 					$ok_flg = false;
 				} else {
 					print '住所<br>';
@@ -87,7 +92,7 @@
 				}
 
 				if (preg_match('/^\d{2,5}-?\d{2,5}-?\d{4,5}$/', $tel) == 0) {
-					print '電話番号を正確に入力してください。<br><br>';
+					print checkGamenDispFieldError('電話番号を正確に入力してください。');
 					$ok_flg = false;
 				} else {
 					print '電話番号<br>';
@@ -97,12 +102,12 @@
 
 				if ($chumon == 'chumontouroku') {
 					if ($pass == '') {
-						print 'パスワードが入力されていません<br><br>';
+						print checkGamenDispFieldError('パスワードが入力されていません');
 						$ok_flg = false;
 					}
 
 					if ($pass != $pass2) {
-						print 'パスワードが一致しません<br><br>';
+						print checkGamenDispFieldError('パスワードが一致しません');
 						$ok_flg = false;
 					}
 
@@ -163,7 +168,7 @@
 			?>
 
 		</div>
-		<?php require_once('../common/html/kaiin_side.php'); ?>
+		<?php require_once('../common/html/mise_side.php'); ?>
 	</div>
 	<?php require_once('../common/html/footer.php'); ?>
 </body>

@@ -1,8 +1,10 @@
 <?php
-	require_once '../common/common.php';
 
 	session_start();
 	session_regenerate_id(true);
+	
+	require_once '../common/common.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +51,11 @@
 		.main-container {
 			width: 65%;
 			float: left;
+			padding-bottom: 50px;
+		}
+
+		.main-title {
+			text-align: center;
 		}
 	</style>
 </head>
