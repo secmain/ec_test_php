@@ -9,6 +9,7 @@ class Mise_db {
 	const MEM_TABLE = 'order_member';
 	const ORDER_TABLE = 'order_tbl';
 	const ORDER_PRODUCT_TABLE = 'order_product_tbl';
+	const REVIEW_TABLE = 'product_review';
 
 	function __construct() {
 		$this->db = connect_db();
@@ -115,6 +116,7 @@ class Mise_db {
 			case self::MEM_TABLE:
 			case self::ORDER_TABLE:
 			case self::ORDER_PRODUCT_TABLE:
+			case self::REVIEW_TABLE:
 				$table_name = $table;
 				break;
 			default:
@@ -153,6 +155,41 @@ class Mise_db {
 			'values' => $vals,
 		];
 
+		return $ret;
+	}
+
+	function get_product_reviews($pro_code) {
+		$sql = <<<EOF
+select
+ rev.id,
+ rev.pro_code,
+ rev.user_id,
+ rev.comment,
+ date_format(rev.up_time, '%Y年%m月%d日 %T') nengetsu,
+ pro.name pro_name, 
+ mem.name user_name,
+ mem.mem_file_path
+from
+ product_review rev join 
+ order_member mem on rev.user_id = mem.code join 
+ mst_product pro on rev.pro_code = pro.code
+where 
+ rev.pro_code = ? and rev.flag = '0' order by rev.up_time desc
+EOF;
+
+		$stmt = $this->db->prepare($sql);
+		$data = [$pro_code];
+		$stmt->execute($data);
+
+		$ret = [];
+
+		while ($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$tmp = [];
+			foreach ($rec as $key => $col) {
+				$tmp[$key] = $col;
+			}
+			$ret[] = $tmp;
+		}
 		return $ret;
 	}
 

@@ -46,7 +46,8 @@
 
 
 				$ok_flg = true;
-
+var_dump('$ok_flg');
+var_dump($ok_flg);
 				// メール改ざんの脆弱性
 				if ($onamae == '') {
 					print checkGamenDispFieldError('お名前が入力されていません。');
@@ -100,14 +101,11 @@
 					print '<br><br>';
 				}
 
+				# 脆弱性入れる
 				if ($chumon == 'chumontouroku') {
-					if ($pass == '') {
-						print checkGamenDispFieldError('パスワードが入力されていません');
-						$ok_flg = false;
-					}
-
-					if ($pass != $pass2) {
-						print checkGamenDispFieldError('パスワードが一致しません');
+					$pass_check = passwordCheck($pass, $pass2);
+					if ($pass_check != 'ok') {
+						print $pass_check;
 						$ok_flg = false;
 					}
 
@@ -125,6 +123,24 @@
 					print $birth;
 					print '年代';
 					print '<br><br>';
+
+					$mem_file_tmp = $_FILES['prof_file']['tmp_name'];
+					$mem_file_name = $_FILES['prof_file']['name'];
+					$mem_file_path = getUpFileTmpName($mem_file_name);
+					$up_img_dir = getUpFileDir('mypage');
+var_dump($mem_file_name);
+					# 画像アップ処理
+					if (is_uploaded_file($mem_file_tmp)) {
+						$file_flag = true;
+					}
+
+					if ($file_flag && !move_uploaded_file($mem_file_tmp, $up_img_dir . $mem_file_path)) {
+						print checkGamenDispFieldError('ファイルのアップロードに失敗しました。');
+						$ok_flag = false;
+					} else if ($file_flag) {
+						print checkGamenDispField('ファイル名：' . $mem_file_name);
+						print '<div id="image-zone" class="image-zone"></div>';
+					}
 				}
 
 				if ($ok_flg === true) {
@@ -140,6 +156,8 @@
 					$inputs['password'] = $pass;
 					$inputs['danjo'] = $danjo;
 					$inputs['birth'] = $birth;
+					$inputs['mem_file_name'] = $mem_file_name;
+					$inputs['mem_file_path'] = $mem_file_path;
 					$_SESSION['inputs'] = $inputs;
 					/* sessionへ格納にする　脆弱性減らす
 					print '<input type="hidden" name="name" value="'. $onamae .'">';

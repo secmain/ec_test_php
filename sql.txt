@@ -95,5 +95,22 @@ create table order_member(
 	address varchar(50) not null,
 	tel varchar(13) not null,	
 	danjo int not null,
-	birth int not null	
+	birth int not null,
+	mem_file_name varchar(100),
+	mem_file_path varchar(100)
+);
+
+#レビュー用テーブル
+create table product_review(
+	id int(8) auto_increment,
+	pro_code int(11) not null,
+	user_id int(11) not null,
+	comment varchar(1000) not null,
+	flag tinyint(1) DEFAULT 0,
+	up_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	index pro_index(pro_code),
+	index userid_index(user_id),
+	foreign key fk_pro_code(pro_code) references mst_product(code),
+	foreign key fk_user_id(user_id) references order_member(code),
+	primary key(id)
 );

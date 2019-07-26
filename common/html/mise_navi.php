@@ -8,7 +8,7 @@
 				print '<br>';
 			} else {
 				print 'ようこそ';
-				print sprintf('<a href="../mise/mise_mypage.php?code=%s">%s</a>', $_SESSION['member']['member_code'], $_SESSION['member']['member_name']);
+				print sprintf('<a href="../mise/mise_edit_mypage.php?code=%s">%s</a>', $_SESSION['member']['member_code'], $_SESSION['member']['member_name']);
 				print '様';
 				print '<br>';
 			}

@@ -51,7 +51,7 @@
 	<div class="main">
 		<div class="main-container">
 			<h3 class="main-title">購入手続き</h3>
-			<form action="mise_form_check.php" method="post">
+			<form action="mise_form_check.php" method="post" enctype="multipart/form-data">
 				<?php
 
 					if (!isset($_SESSION['cart']) || !count($_SESSION['cart'])) {

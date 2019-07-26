@@ -160,6 +160,7 @@
 			case 'product':
 			case 'mypage':
 			case 'mise':
+			case 'mise_mypage':
 				return '../up_img/';			
 			default:
 				# code...
@@ -192,6 +193,21 @@
 			setcookie(session_name(), '', time()-42000, '/');
 		}
 		@session_destroy();
+	}
+
+	function passwordCheck($pass1, $pass2) {
+		$ret = 'ok';
+		if ($pass1 == '') {
+			$ret = checkGamenDispFieldError('パスワードが入力されていません');
+		} else if ($pass1 != $pass2) {
+			$ret = checkGamenDispFieldError('パスワードが一致しません');
+		}
+
+		return $ret;
+	}
+
+	function isMemberLogin() {
+		return isset($_SESSION['member']) && $_SESSION['member']['member_login'] == 1;
 	}
 
 ?>

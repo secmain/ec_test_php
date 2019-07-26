@@ -57,7 +57,9 @@
 					$pass = $member_info['password'];
 					$danjo = $member_info['danjo'];
 					$birth = $member_info['birth'];
-
+					$mem_file_name = $member_info['mem_file_name'];
+					$mem_file_path = $member_info['mem_file_path'];
+var_dump($member_info);
 
 					print $onamae . '様<br>';
 					print 'ご注文ありがとう<br>';
@@ -111,6 +113,8 @@
 							'address' => $address,
 							'birth' => $birth,
 							'danjo' => $danjo == 'man' ? 1 : 2,
+							'mem_file_name' => $mem_file_name,
+							'mem_file_path' => $mem_file_path,
 						]);
 						$last_member = $mise_db->get_last_ins_id();
 
