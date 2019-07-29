@@ -46,8 +46,7 @@
 
 
 				$ok_flg = true;
-var_dump('$ok_flg');
-var_dump($ok_flg);
+
 				// メール改ざんの脆弱性
 				if ($onamae == '') {
 					print checkGamenDispFieldError('お名前が入力されていません。');
@@ -128,7 +127,7 @@ var_dump($ok_flg);
 					$mem_file_name = $_FILES['prof_file']['name'];
 					$mem_file_path = getUpFileTmpName($mem_file_name);
 					$up_img_dir = getUpFileDir('mypage');
-var_dump($mem_file_name);
+
 					# 画像アップ処理
 					if (is_uploaded_file($mem_file_tmp)) {
 						$file_flag = true;

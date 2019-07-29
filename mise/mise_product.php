@@ -84,23 +84,22 @@
 			<input type="button" onclick="history.back()" value="戻る" class="btn">
 			<input type="button" onclick="location.href='mise_cartin.php?pro_code=<?php print $pro_code; ?>'" value="カートに入れる" class="btn">
 
+			<a name="keijiban"></a>
 			<div class="review-zone">
 				<h3 class="review-title"><?php print $pro_name ?>の口コミ掲示板</h3>
 				<div class="reviews" style="height: 400px;overflow-y: auto;">
 					<?php 
 						$reviews = $mise_db->get_product_reviews($pro_code);
-						var_dump($reviews);
-						print $pro_img_dir . basename($reviews[0]['mem_file_path']);
 						foreach ($reviews as $i => $review) {
 							print '<div class="review" style="padding:20px;border-radius:40px;width: 70%; text-align:left;background-color: grey;margin: 10px auto;">';
-							print sprintf('<img src="<?php print $pro_img_dir . basename($review[\'mem_file_path\']); ?>" class="mem-img-file" >%sさん（%s）<br>投稿日:%s<br>内容：<br>%s', $review['user_name'], $review['user_id'], $review['nengetsu'], $review['comment']);
+							print sprintf('<img src="%s" class="mem-img-file" >%sさん（%s）<br>投稿日:%s<br>内容：<br>%s', $pro_img_dir . basename($review['mem_file_path']), $review['user_name'], $review['user_id'], $review['nengetsu'], $review['comment']);
 							print '</div>';
 						}
 					?>
 				</div>
 
 				<form action="mise_product_review_done.php" class="review-form" method="post">
-					review:
+					コメント:
 					<textarea name="comment" cols=40 rows=4></textarea><br>
 					<input type="hidden" name="pro_code" value="<?php print $pro_code; ?>">
 					<input type="submit" class="review-btn btn" value="投稿">

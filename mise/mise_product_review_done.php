@@ -56,7 +56,7 @@
 						'comment' => $comment,
 					]);
 
-					header('Location:mise_product.php?pro_code=' . $pro_code);
+					header('Location:mise_product.php?pro_code=' . $pro_code . '#keijiban');
 
 				} catch (Exception $e) {
 					print $e;

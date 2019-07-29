@@ -81,6 +81,8 @@
 				  $mise_dir . 'mise_form.php' => ['name' => '購入手続き', 'parent' => $mise_dir . 'mise_list.php'],
 				  // 商品詳細
 				  $mise_dir . 'mise_product.php' => ['name' => '商品詳細', 'parent' => $mise_dir . 'mise_list.php'],
+				  // myページ編集
+				  $mise_dir . 'mise_edit_mypage.php' => ['name' => 'myページ編集', 'parent' => $mise_dir . 'mise_list.php'],
 				 ],
 			2 => [$kaiin_dir . 'kaiin_edit.php' => ['name' => '会員編集', 'parent' => $kaiin_dir . 'kaiin_list.php'],
 				  $mypage_dir . 'kaiin_edit_mypage_check.php' => ['name' => 'myページ編集確認', 'parent' => $mypage_dir . 'kaiin_edit_mypage.php'],
@@ -95,6 +97,8 @@
 				  $contact_dir . 'contact_check.php' => ['name' => 'お問い合わせ確認', 'parent' => $contact_dir . 'contact.php'],
 				  // 購入手続き確認
 				  $mise_dir . 'mise_form_check.php' => ['name' => '購入手続き確認', 'parent' => $mise_dir . 'mise_form.php'],
+				  // myページ編集確認
+				  $mise_dir . 'mise_edit_mypage_check.php' => ['name' => 'myページ編集確認', 'parent' => $mise_dir . 'mise_edit_mypage.php'],
 				],
 			3 => [$kaiin_dir . 'kaiin_edit_check.php' => ['name' => '会員編集確認', 'parent' => $kaiin_dir . 'kaiin_edit.php'],
 				  $kaiin_dir . 'kaiin_add_check.php' => ['name' => '会員追加確認', 'parent' => $kaiin_dir . 'kaiin_add.php'],
@@ -108,6 +112,8 @@
 				  $contact_dir . 'contact_done.php' => ['name' => 'お問い合わせ完了', 'parent' => $contact_dir . 'contact_check.php'],
 				  // 購入手続き完了
 				  $mise_dir . 'mise_form_done.php' => ['name' => '購入手続き完了', 'parent' => $mise_dir . 'mise_form_check.php'],
+				  // myページ編集完了
+				  $mise_dir . 'mise_edit_mypage_done.php' => ['name' => 'myページ編集完了', 'parent' => $mise_dir . 'mise_edit_mypage_check.php'],
 				],
 			4 => [$kaiin_dir . 'kaiin_edit_done.php' => ['name' => '会員編集完了', 'parent' => $kaiin_dir . 'kaiin_edit_check.php'],
 				  $product_dir . 'pro_edit_done.php' => ['name' => '商品編集完了', 'parent' => $product_dir . 'pro_edit_check.php'],
