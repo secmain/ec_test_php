@@ -9,34 +9,7 @@
 	<meta charset="UTF-8">
 	<title>カート</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
-	<link rel="stylesheet" href="../css/pro_disp.css">
-	<style>
-		.form-table {
-			width: 90%;
-			text-align: center;
-		 	margin: 0 auto;
-			margin-bottom: 10px;
-			border: solid 1px grey;
-		}
-
-		.form-table td {
-			width: 50px;
-			border: solid 1px grey;
-		}
-
-		.pro-img-file {
-			display: block;
-			width: 50px;
-			height: 50px;
-		}
-
-		.form-table .noshohin-msg {
-			font-size: 18px;
-			margin-top: 5px;
-			margin-bottom: 10px;
-			background-color: yellow;
-		}
-	</style>
+	<link rel="stylesheet" href="../css/mise_cart.css">
 </head>
 <body>
 
@@ -77,12 +50,12 @@
 			<form action="count_change.php" method="post">
 				<table class="form-table">
 					<tr>
-						<td>商品</td>
-						<td>画像</td>
-						<td>価格</td>
-						<td>数量</td>
-						<td>小計</td>
-						<td>削除</td>
+						<th>商品</th>
+						<th>画像</th>
+						<th>価格</th>
+						<th>数量</th>
+						<th>小計</th>
+						<th>削除</th>
 					</tr>
 
 					<?php if ($max === 0) { ?>

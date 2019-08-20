@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+.form-table {
+	width: 60%;
+	text-align: center;
+  margin: 0 auto;
+	margin-bottom: 10px;
+}
+
+.form-table  tr {
+  border-bottom: solid 2px white;
+}
+
+.form-table tr:last-child {
+  border-bottom: none;
+}
+
+.form-table th {
+  position: relative;
+  text-align: left;
+  width: 30%;
+  background-color: #52c2d0;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 1rem;
+}
+
+.form-table td {
+  width: 70%;
+  text-align: center;
+  background-color: #eee;
+  padding: 10px 0;
+}
+
+.pro-img-file {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  height: 200px; 
+}
+
+.review-zone {
+  margin: 100px;
+}
+
+.reviews {
+  height: 400px;
+  width: 70%;
+  margin: 0 auto;
+  overflow-y: auto;
+  background-color: #ffffe0;
+}
+
+.review-form {
+  display: block;
+  margin-top: 20px;
+}
+
+.mem-img-file {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  border-radius: 20px;
+}

@@ -9,18 +9,11 @@
 	<meta charset="UTF-8">
 	<title>購入手続き</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
-	<link rel="stylesheet" href="../css/pro_disp.css">
-	<style>
-		.hidden-area {
-			display: none;
-		}
-
-		.ng-message {
-			margin: 20px;
-		}
-	</style>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/mise_form.css">
 	<script>
 		function init() {
+			disp_change();
 			addEventListener('change', disp_change, false);
 
 			function disp_change() {
@@ -68,7 +61,7 @@
 					$tel = '';
 
 					// メンバーログインチェック
-					$is_login = isset($_SESSION['member']) && $_SESSION['member']['member_login'] == 1;
+					$is_login = isMemberLogin();
 					// メンバーログイン時
 					if ($is_login) {
 

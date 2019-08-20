@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<title>myページ編集確認</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
-	<link rel="stylesheet" href="../css/pro_edit.css">
+	<link rel="stylesheet" href="../css/common.css">
 	<script src="../common/js/common.js"></script>
 	<script>
 		(function () {

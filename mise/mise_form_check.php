@@ -9,12 +9,8 @@
 	<meta charset="UTF-8">
 	<title>商品購入確認</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
-	<link rel="stylesheet" href="../css/pro_edit.css">
-	<style>
-		.error {
-			color:red;
-		}
-	</style>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/mise_form.css">
 </head>
 <body>
 	<?php
@@ -157,7 +153,7 @@
 					$inputs['birth'] = $birth;
 					$inputs['mem_file_name'] = $mem_file_name;
 					$inputs['mem_file_path'] = $mem_file_path;
-					$_SESSION['inputs'] = $inputs;
+					$_SESSION['mise_inputs'] = $inputs;
 					/* sessionへ格納にする　脆弱性減らす
 					print '<input type="hidden" name="name" value="'. $onamae .'">';
 					print '<input type="hidden" name="email" value="'. $email .'">';

@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+.form-table {
+	width: 60%;
+	text-align: center;
+  margin: 0 auto;
+	margin-bottom: 10px;
+}
+
+.form-table  tr {
+  border-bottom: solid 2px white;
+}
+
+.form-table tr:last-child {
+  border-bottom: none;
+}
+
+.form-table th {
+  position: relative;
+  text-align: left;
+  width: 30%;
+  background-color: #52c2d0;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 1rem;
+}
+
+.form-table td {
+  width: 70%;
+  text-align: center;
+  background-color: #eee;
+  padding: 10px 0;
+}
+
+.hidden-area {
+  display: none;
+}
+
+.ng-message {
+  margin: 20px;
+}

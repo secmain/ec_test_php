@@ -9,11 +9,7 @@
 	<meta charset="UTF-8">
 	<title>数量変更処理</title>
 	<link href="../common/css/font-awesome/css/all.css" rel="stylesheet"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/mise_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/mise_navi.css">
-	<link rel="stylesheet" href="../common/css/mise_side.css">
+	<?php require_once('../common/html/mise_style.php'); ?>
 	<link rel="stylesheet" href="../common/css/mise_side_cate.css">
 	<link rel="stylesheet" href="../css/pro_disp.css">
 </head>

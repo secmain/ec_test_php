@@ -12,25 +12,18 @@
 }
 
 .form-table {
-	width: 60%;
-	text-align: center;
+  width: 90%;
+  text-align: center;
   margin: 0 auto;
-	margin-bottom: 10px;
-}
-
-.form-table  tr {
-  border-bottom: solid 2px white;
-}
-
-.form-table tr:last-child {
-  border-bottom: none;
+  margin-bottom: 10px;
+  border: solid 1px grey;
 }
 
 .form-table th {
   position: relative;
   text-align: left;
   width: 30%;
-  background-color: #52c2d0;
+  background-color: #444444;
   color: white;
   text-align: center;
   padding: 10px 0;
@@ -38,15 +31,21 @@
 }
 
 .form-table td {
-  width: 70%;
-  text-align: center;
-  background-color: #eee;
-  padding: 10px 0;
+  width: 50px;
+  border: solid 1px grey;
 }
 
 .pro-img-file {
   display: block;
+  width: 50px;
+  height: 50px;
   margin: 0 auto;
-  width: 80%;
-  height: 200px; 
 }
+
+.form-table .noshohin-msg {
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background-color: yellow;
+}
+

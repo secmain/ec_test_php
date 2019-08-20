@@ -165,8 +165,6 @@ class Mise_db {
 			$vals .= $col . '=' . "'" . $value . "'" . ',';
 		}
 		$vals = substr($vals, 0, -1);
-		var_dump($code);
-		var_dump($data);
 
 		$sql = sprintf('update order_member set %s where code = \'%s\'', $vals, $code);
 		$stmt = $this->db->prepare($sql);

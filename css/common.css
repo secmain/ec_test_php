@@ -1,3 +1,17 @@
+@charset "utf-8";
+
+.main-container {
+	float: left;
+	width: 80%;
+	margin: 0 auto;
+	margin-bottom: 100px;
+	text-align: center;
+}
+
+.main-title {
+	margin-bottom: 20px;
+}
+
 .a-btn {
 	display: inline-block;
 	border: 0.5px solid silver;
@@ -8,6 +22,10 @@
 	height: 40px;
 	background-color: silver;
 	text-decoration: none;
+}
+
+.error {
+	color:red;
 }
 
 .sm-input-box {

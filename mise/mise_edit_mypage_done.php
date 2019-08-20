@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<title>会員修正完了</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
-	<link rel="stylesheet" href="../css/pro_disp.css">
+	<link rel="stylesheet" href="../css/common.css">
 </head>
 <body>
 	<?php
@@ -46,11 +46,11 @@
 						'mem_file_path' => $member['my_file_path'],
 					]);
 
-					$db = null;
+					unset($mise_db);
 
 					// セッションの会員名も更新
 					$member['member'] = $member_info;
-					print $member_name . 'を更新しました <br>';
+					print '更新完了しました <br>';
 					print '<a href="../mise/mise_list.php" class="btn">商品一覧画面へ</a>';
 
 				} catch (Exception $e) {

@@ -9,14 +9,8 @@
 	<meta charset="UTF-8">
 	<title>myページ</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
-	<link rel="stylesheet" href="../css/pro_edit.css">
-	<style>
-		.form-table {
-			width: 60%;
-			margin: 0 auto;
-			margin-bottom: 10px;
-		}
-	</style>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/member_edit.css">
 </head>
 <body>
 	<?php

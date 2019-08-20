@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title><script>alert('ins the title')</script></title>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<s<script>cript>alert(1)</sc</script>ript>
+	aaa
+	<?php echo "aa";?>
+	<?php var_dump("aa");?>
+	<button onclick="sampleConfirmB()">aaaa</button>
+	<span id="sampleOutputB"></span>
+	<script type="text/javascript">
+	function sampleConfirmB() {
+	    var $arguments = new Array( "引数１", "引数２" );
+	    var $returnValueB = showModalDialog(
+	        "C:/Users/uejyou10506/Desktop/aa.html?a=buttonb",
+	        $arguments
+	    );
+	    var a = 'c\r\n((function(){alert(1)}());)\'
+	    	    document.getElementById( "sampleOutputB" ).innerHTML = "戻り値：" + $returnValueB;
+	}
+
+	function testInner() {
+		var elem = document.getElementById('sampleOutputB');
+		var b = ''
+		elem.innerHTML = "ddddd"
+		elem.innerHTML = 'bbbbbbB<script>alert("bb")\</script\>';
+		elem.innerHTML = '">aaa<img src="a" onerror="console.log(this)"><script>alert("a")\</script\>';
+	}
+
+    testInner();     </script>     <img src="a" onerror="document.cookie">
+<img src="a"' onblur=alert(document.cookie); //>
+"><script>alert(document.cookie)</script>
+""\"">><>><>><script>alert(document.cookie)</script>
+     ">aaa<img src="a"
+onerror="alert('XSS1: ' + document.cookie)"><script>alert('XSS2: ' +
+document.cookie)</script>     <dIv>         " onblur=alert(1) //     </div>
+"><img src=1 onerror="alert('X')"><script>alert('"a')</script>     "><img
+src=1 onerror="alert('X')"><script>alert(document.cookie)</script>
+"><script>alert(document.cookie)</script>
+     "><script>alert('a\'')</script>
+"><script>alert('xss')</script>      onchange=alert(5)      ">aaa<img src="a"
+onerror="console.log\(this\)"><script>alert\('"a'\)</script>     <img src="a"
+onerror="alert('aa')"><img src="a" onerror="alert(document.cookie)">     <span
+style="color:red">aaa</span>     <script>setTimeout(console.log("aaa"),
+5000)</script>     <input type="text" " onerror=alert(document.cookie); //">
+"><s>aa<!-- --> a</s>     <input type="submit"
+name="ctl00$cphMain$btnShyuroku" value="aaa"> </body> </html>
+

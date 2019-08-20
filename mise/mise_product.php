@@ -9,25 +9,8 @@
 	<meta charset="UTF-8">
 	<title>商品詳細</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
-	<link rel="stylesheet" href="../css/pro_disp.css">
-	<style>
-		.review-zone {
-			margin: 100px;
-		}
-
-		.review-form {
-			display: block;
-			margin-top: 20px;
-		}
-
-		.mem-img-file {
-			display: inline-block;
-			width: 50px;
-			height: 50px;
-			margin-right: 20px;
-			border-radius: 20px;
-		}
-	</style>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/mise_pro.css">
 </head>
 <body>
 <?php
@@ -87,7 +70,7 @@
 			<a name="keijiban"></a>
 			<div class="review-zone">
 				<h3 class="review-title"><?php print $pro_name ?>の口コミ掲示板</h3>
-				<div class="reviews" style="height: 400px;overflow-y: auto;">
+				<div class="reviews">
 					<?php 
 						$reviews = $mise_db->get_product_reviews($pro_code);
 						foreach ($reviews as $i => $review) {
@@ -105,7 +88,6 @@
 					<input type="submit" class="review-btn btn" value="投稿">
 				</form>
 			</div>
-			<div class="footer-dummy" style="height: 200px;"></div>
 		</div>
 		<?php require_once('../common/html/mise_side.php'); ?>
 	</div>

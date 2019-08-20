@@ -16,7 +16,7 @@
 	<meta charset="UTF-8">
 	<title>商品購入完了</title>
 	<?php require_once('../common/html/mise_style.php'); ?>
-	<link rel="stylesheet" href="../css/pro_disp.css">
+	<link rel="stylesheet" href="../css/common.css">
 </head>
 <body>
 	<?php
@@ -34,14 +34,15 @@
 				try {	
 
 					$member_info;
-					$is_login = isset($_SESSION['member_login']) && $_SESSION['member_login'] == 1;
 					
 					$mise_db = new Mise_db();
 
+					$is_login = isMemberLogin();
+
 					if ($is_login) {
-						$member_info = $mise_db->get_order($_SESSION['member_code']);
+						$member_info = $mise_db->get_member($_SESSION['member']['member_code']);
 					} else {
-						$member_info = sanitize($_SESSION['inputs']);	
+						$member_info = sanitize($_SESSION['mise_inputs']);
 					}
 
 					$onamae = $member_info['name'];
@@ -59,7 +60,7 @@
 					$birth = $member_info['birth'];
 					$mem_file_name = $member_info['mem_file_name'];
 					$mem_file_path = $member_info['mem_file_path'];
-var_dump($member_info);
+
 
 					print $onamae . '様<br>';
 					print 'ご注文ありがとう<br>';
