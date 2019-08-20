@@ -93,7 +93,6 @@
 					</tr>
 				</table>
 				<input type="button" onclick="history.back()" value="戻る" class="btn">
-				<input type="button" onclick="location.href='./mise_mypage_output.php?member_code=<?php print $member_code; ?>'" value="プロフィール出力" class="btn">
 				<input type="submit" value="送信" class="btn">
 			</form>
 		</div>
