@@ -7,21 +7,16 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<link href="../common/css/font-awesome/css/all.css" rel="stylesheet"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/common.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 	<link rel="stylesheet" href="../css/kaiin_edit.css">
 	<title>会員修正</title>
 </head>
 <body>
-<?php
+	<?php
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Kaiin_db.php');
 
 		try {
 
@@ -29,25 +24,20 @@
 			// $kaiin_code = htmlspecialchars($kaiin_code);
 			$kaiin_code = $_GET['kaiin_code'];			
 
-			$db = connect_db();
-			$db->query('set names utf8');
+			$kaiin_db = new Kaiin_db();
 
-			$sql = 'select code, name from mst_tbl where code = ?';
-			$stmt = $db->prepare($sql);
-			$data = [$kaiin_code];
-			$stmt->execute($data);
-
-			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+			$rec = $kaiin_db->get_kaiin($kaiin_code);
+			
 			$kaiin_name = $rec['name'];
 
-			$db = null;
+			unset($kaiin_db);
 
 		} catch (Exception $e) {
 				print 'system error !!!';
 				print $e;
 				exit();
 		} 
-?>
+	?>
 	<div class="main" class="clear-fix">
 		<div class="main-container">
 			<h3 class="main-title">スタッフ修正</h3>

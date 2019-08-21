@@ -85,6 +85,7 @@
 				  $mise_dir . 'mise_edit_mypage.php' => ['name' => 'myページ編集', 'parent' => $mise_dir . 'mise_list.php'],
 				 ],
 			2 => [$kaiin_dir . 'kaiin_edit.php' => ['name' => '会員編集', 'parent' => $kaiin_dir . 'kaiin_list.php'],
+				  $kaiin_dir . 'kaiin_disp.php' => ['name' => '会員参照', 'parent' => $kaiin_dir . 'kaiin_list.php'],
 				  $mypage_dir . 'kaiin_edit_mypage_check.php' => ['name' => 'myページ編集確認', 'parent' => $mypage_dir . 'kaiin_edit_mypage.php'],
 				  // パスワード変更
 				  $mypage_dir . 'kaiin_password_change.php' => ['name' => 'pw変更', 'parent' => $mypage_dir . 'kaiin_edit_mypage.php'],

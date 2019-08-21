@@ -1,11 +1,4 @@
 <?php
-session_start();
-session_regenerate_id(true);
-if (isset($_SESSION['login']) == false) {
-	print 'ログインされていません。';
-	print '<a href="../kaiin_login/kaiin_login.html">ログイン画面へ</a>';
-	exit();
-}
 
 if (isset($_POST['add']) == true) {
 	header('Location:kaiin_add.php');

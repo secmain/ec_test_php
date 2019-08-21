@@ -1,55 +1,68 @@
 <?php
 	session_start();
 	session_regenerate_id(true);
-	if (isset($_SESSION['login']) == false) {
-		print 'ログインされていません。';
-		print '<a href="../kaiin_login/kaiin_login.html">ログイン画面へ</a>';
-		exit();
-	} else {
-		print $_SESSION['kaiin_name'];
-		print 'さんログイン中<br>';
-		print '<br>';
-	}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 	<meta charset="UTF-8">
 	<title>会員参照</title>
+	<?php require_once('../common/html/kaiin_style.php'); ?>
+	<link rel="stylesheet" href="../css/kaiin_edit.css">
 </head>
 <body>
-<?php
+	<?php
+
+		require_once('../common/html/kaiin_header.php');
+		require_once('../common/html/kaiin_navi.php');
+		require_once('../common/common.php');
+		require_once('../class/Kaiin_db.php');
+
 		try {
 
 			$kaiin_code = $_GET['kaiin_code'];
 			//　ここでサニタイジング
 			// $kaiin_code = htmlspecialchars($kaiin_code);
 
-			$dsn = 'mysql:dbname=ec_test_php;host=localhost;';
-			$user = 'an';
-			$password = 'password';
-			$db = new PDO($dsn, $user, $password);
-			$db->query('set names utf8');
+			$kaiin_db = new Kaiin_db();
 
-			$sql = 'select code, name from mst_tbl where code = ?';
-			$stmt = $db->prepare($sql);
-			$data = [$kaiin_code];
-			$stmt->execute($data);
+			$rec = $kaiin_db->get_kaiin($kaiin_code);
 
-			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 			$kaiin_name = $rec['name'];
 
-			$db = null;
+			unset($kaiin_db);
 
 		} catch (Exception $e) {
 				print 'system error !!!';
 				print $e;
 				exit();
 		} 
-?>
-		スタッフ<br>
-		スタッフコード：<br><?php print $kaiin_code ?><br>
-		スタッフ名：<br><?php print $kaiin_name ?><br>
+	?>
+
+	<div class="main">
+		<div class="main-container">
+			<h2 class="main-title">会員参照</h2>
+			<div><b>スタッフ</b></div>
+			<table class="form-table">				
+				<tr>
+					<th>会員コード：</th>
+					<td><?php print $kaiin_code ?><br></td>
+				</tr>
+				<tr>
+					<th>名前：</th>
+					<td><input type="text" name="name" value="<?php print $kaiin_name; ?>"><br></td>
+				</tr>
+				<tr>
+					<th>画像：<br></th>
+					<td>
+						<img src="<?php print $my_img_dir . basename($my_file_path); ?>" class="my-img-file" onerror="this.src='../up_img/no-image.jpg'" alt="<?php print $my_file_name; ?>"><br>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<?php require_once '../common/html/kaiin_side.php'; ?>
+	</div>
+	<?php require_once '../common/html/footer.php'; ?>
 </body>
 </html>

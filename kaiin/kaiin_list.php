@@ -8,12 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>会員リスト</title>
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 	<link rel="stylesheet" href="../css/kaiin_list.css">
 </head>
 <body>
@@ -30,21 +25,14 @@
 				<div class="kaiin-zone">
 	<?php
 		try {
-			$db = connect_db();
-			$db->query('set names utf8');
 
-			$sql = 'select code, name, prof_file_name, prof_file_path from mst_tbl';
-			$stmt = $db->prepare($sql);
+			require_once('../class/Kaiin_db.php');
 
-			$stmt->execute();
+			$kaiin_db = new Kaiin_db();
 
-			$db = null;
+			$recs = $kaiin_db->get_kaiins();
 
-			while (true) {
-				$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-				if ($rec == false) {
-						break;
-				}
+			foreach ($recs as $i => $rec) {
 				print '<label>';
 				print '<div class="kaiin-box">';
 				print '<img src="' . $my_img_dir . basename($kaiin_file_name) . '" class="kaiin-image" onerror="this.src=\'../up_img/no-image.jpg\'" alt="' . $kaiin_file_name . '"><br>';
@@ -71,8 +59,6 @@
 		</div>
 		<?php require_once '../common/html/kaiin_side.php'; ?>
 	</div>
-	
 	<?php require_once '../common/html/footer.php'; ?>
-
 </body>
 </html>

@@ -8,12 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>注文情報ダウンロード</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 	<link rel="stylesheet" href="../css/pro_edit.css">
 </head>
 <body>

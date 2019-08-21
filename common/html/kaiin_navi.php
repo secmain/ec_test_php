@@ -3,13 +3,13 @@
 
 	<div class="login-info">
 		<?php
-			if (isset($_SESSION['login']) == false) {
+			if (isset($_SESSION['kaiin']) == false || isset($_SESSION['kaiin']['login']) == false) {
 				print 'ログインされていません。';
 				print '<a href="' . getDomainName() . '/ec_php/kaiin_login/kaiin_login.php">ログイン画面へ</a>';
 				exit();
 			} else {
 				print '<a href="' . getDomainName() . '/ec_php/kaiin/kaiin_edit_mypage.php">';
-				print $_SESSION['kaiin_name'];
+				print $_SESSION['kaiin']['kaiin_name'];
 				print '</a>さんログイン中';
 			}
 		?>
