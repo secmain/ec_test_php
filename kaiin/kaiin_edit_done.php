@@ -8,54 +8,45 @@
 <head>
 	<meta charset="UTF-8">
 	<title>会員修正完了</title>
-	<link href="../common/css/font-awesome/css/all.css" rel="stylesheet"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/common.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
-	<link rel="stylesheet" href="../css/kaiin_edit.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 </head>
 <body>
 	<?php
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Kaiin_db.php');
 	?>
 
 	<div class="main">
 		<div class="main-container">
-			<div class="comp-message">
+			<h3 class="main-title">会員修正完了</h3>
 				<?php
 					try {
-						$kaiin_code = $_POST['code'];
-						$kaiin_name = $_POST['name'];
-						$kaiin_pass = $_POST['password'];
+
+						$post = sanitize($_POST);
+						$kaiin_code = $post['code'];
+						$kaiin_name = $post['name'];
+						$kaiin_file_name = $post['kaiin_file_name'];
+						$kaiin_file_path = $post['kaiin_file_path'];
+
+						$kaiin_db = new Kaiin_db();
 						
-						$kaiin_code = htmlspecialchars($kaiin_code);
-						$kaiin_name = htmlspecialchars($kaiin_name);
-						$kaiin_pass = htmlspecialchars($kaiin_pass);
+						$data = [
+							'name' => $kaiin_name,
+							'prof_file_name' => $kaiin_file_name,
+							'prof_file_path' => $kaiin_file_path,
+						];
 
-						$db = connect_db();
-						$db->query('set names utf8');
+						$kaiin_db->up_kaiin($kaiin_code, $data);
 
-						$sql = 'update mst_tbl set name=?, password=? where code=?';
-						$stmt = $db->prepare($sql);
-						$data[] = $kaiin_name;
-						$data[] = $kaiin_pass;
-						$data[] = $kaiin_code;
+						unset($kaiin_db);
 
-						$stmt->execute($data);
-
-						$db = null;
-
-						print $kaiin_name . 'を更新しました <br>';
+						print checkGamenDispField($kaiin_name . 'を更新しました');
 
 					} catch (Exception $e) {
 						print 'system error!!';
 						exit();
-
 					}
 				?>
 			</div>

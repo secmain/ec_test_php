@@ -28,9 +28,12 @@
 
 			$rec = $kaiin_db->get_kaiin($kaiin_code);
 			
-			$kaiin_name = $rec['name'];
-
 			unset($kaiin_db);
+
+			$kaiin_name = $rec['name'];
+			$my_file_name = $rec['prof_file_name'];
+			$my_file_path = $rec['prof_file_path'];
+			$my_img_dir = getUpFileDir('kaiin');
 
 		} catch (Exception $e) {
 				print 'system error !!!';
@@ -50,17 +53,13 @@
 							<td><input type="hidden" name="code" value="<?php print $kaiin_code; ?>"><br></td>
 						</tr>
 						<tr>
-							<th>会員区分：</th>
-							<td><?php print $rec['kanrisha'] ? '管理者' : '一般' ?><br><br></td>
-						</tr>
-						<tr>
 							<th>名前：</th>
 							<td><input type="text" name="name" value="<?php print $kaiin_name; ?>"><br><br></td>
 						</tr>
 						<tr>
 							<th>画像：<br></th>
 							<td>
-								<img src="" class="my-profile"><br>
+								<img src="<?php print $my_img_dir . basename($my_file_path); ?>" class="my-profile" onerror="this.src='../up_img/no-image.jpg'" alt="<?php print $my_file_name; ?>">
 								<input type="file" name="prof_file" size="10">
 							</td>
 						</tr>

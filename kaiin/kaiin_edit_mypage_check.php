@@ -70,8 +70,8 @@
 				} else {
 					$inputs = [
 						'my_name' => $kaiin_name,
-						'my_file_name' => $my_file_name,
-						'my_file_path' => $my_file_path
+						'prof_file_name' => $my_file_name,
+						'prof_file_path' => $my_file_path
 					];
 					$_SESSION['my_inputs'] = $inputs;
 					print '<form method="post" action="kaiin_edit_mypage_done.php">';

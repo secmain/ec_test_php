@@ -8,50 +8,45 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品一覧</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/pro_style.php'); ?>
 	<link rel="stylesheet" href="../css/pro_list.css">
 </head>
 <body>
+
 	<?php
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
-
-		try {
-			$db = connect_db();
-		} catch (Exception $e) {
-				print 'system error !!!';
-				print $e;
-				exit();
-		} 
+		require_once('../class/Product_db.php');
 	?>
 	
 	<div class="main">
 		<div class="main-container">
 			<h2 class="main-title">商品一覧</h2>
+			<?php
+				try {
+					$pro_db = new Product_db();
+					$categorys = $pro_db->get_categorys();
+
+					$cate = isset($_GET['category']) ? $_GET['category'] : null;
+					$products = $pro_db->get_products($cate);
+
+					unset($pro_db);
+
+				} catch (Exception $e) {
+						print 'system error !!!';
+						print $e;
+						exit();
+				}
+			?> 
 			<center>
 			<form method="get" action="" class="category-select">
 				カテゴリー：&nbsp;&nbsp;
 				<select name="category" id="pro_category">
 					<option value="">指定なし</option>
 					<?php
-						try {
-							$cate_sql = 'select id, text from pro_category';
-							$stmt = $db->prepare($cate_sql);
-							$stmt->execute();
-
-							while ($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
-								print '<option value="' . $rec['id'] . '">' . $rec['text'] . '</option>';
-							}
-						} catch (Exception $e) {
-							print 'system error !!!';
-							print $e;
-							exit();					
+						foreach ($categorys as $i => $category) {
+							print '<option value="' . $category['id'] . '">' . $category['text'] . '</option>';
 						}
 					?>
 				</select>
@@ -62,45 +57,20 @@
 				<div class="products">
 
 	<?php
-		try {
-
-			// $db = connect_db();
-
-			// SQLインジェクション脆弱性のため
-			$sql = 'select code, name, price, file_path from mst_product';
-			if (isset($_GET['category']) && intval($_GET['category'])) {
-				$sql .= ' where category = ' . $_GET['category'];
-			}
-
-			$stmt = $db->prepare($sql);
-
-			$stmt->execute();
-
-			$db = null;
 
 			$up_img_dir = getUpFileDir('product');
 
-
-			while (true) {
-				$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-				if ($rec == false) {
-						break;
-				}
+			foreach ($products as $i => $product) {
 				print '<label>';
 				print '<div class="product">';
-				print '<img src="' . $up_img_dir . $rec['file_path'] . '" class="product-image" onerror="this.src=\'../up_img/no-image.jpg\'"><br>';
-				print '<input type="radio" name="pro_code" value="' . $rec['code'] . '">';
-				print $rec['name'] . '<br>';
-				print $rec['price'] . '円<br>';
+				print '<img src="' . $up_img_dir . $product['file_path'] . '" class="product-image" onerror="this.src=\'../up_img/no-image.jpg\'"><br>';
+				print '<input type="radio" name="pro_code" value="' . $product['code'] . '">';
+				print $product['name'] . '<br>';
+				print $product['price'] . '円<br>';
 				print '</div>';
 				print '</label>';
 			}
 
-		} catch (Exception $e) {
-				print 'system error !!!';
-				print $e;
-				exit();
-		} 
 	?>
 				</div>
 				<input type="submit" name="add" value="追加" class="btn">

@@ -11,21 +11,26 @@ if (isset($_COOKIE[session_name()]) == true) {
 <head>
 	<meta charset="UTF-8">
 	<title>logout</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
+	<style>
+		.main-container {
+			width: 100%;
+			margin: 0 auto;
+		}
+	</style>
 </head>
 <body>
 	<?php
 		require_once('../common/html/kaiin_header.php');
-		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
 	?>
-	aaaaaaaaaaaa
-	ログアウトしました。<br>
-	<a href="../kaiin_login/kaiin_login.php">ログイン画面へ</a>
+	<div class="main">
+		<div class="main-container">
+			<h3 class="main-title">ログアウトしました</h3><br>
+	
+			<a href="../kaiin_login/kaiin_login.php" class="btn">ログイン画面へ</a>
+		</div>
+	</div>
+	<?php require_once('../common/html/footer.php'); ?>
 </body>
 </html>

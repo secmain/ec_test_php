@@ -8,13 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>お問い合わせ内容確認</title>
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
-	<link rel="stylesheet" href="../css/contact.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 </head>
 
 <body>
@@ -88,12 +82,14 @@
 					print '<input type="button" onclick="history.back()" value="戻る">';
 					print '</form>';
 				} else {
-					$_SESSION['name'] = $name;
-					$_SESSION['seibetsu'] = $seibetsu;
-					$_SESSION['address'] = $address;
-					$_SESSION['email'] = $email;
-					$_SESSION['subject'] = $subject;
-					$_SESSION['content'] = $content;
+					$inputs = [];
+					$inputs['name'] = $name;
+					$inputs['seibetsu'] = $seibetsu;
+					$inputs['address'] = $address;
+					$inputs['email'] = $email;
+					$inputs['subject'] = $subject;
+					$inputs['content'] = $content;
+					$_SESSION['contact_inputs'] = $inputs;
 					print '<form method="post" action="contact_done.php">';
 					print '<input type="button" onclick="history.back()" value="戻る" class="btn">';
 					print '<input type="submit" value="OK" class="btn">';

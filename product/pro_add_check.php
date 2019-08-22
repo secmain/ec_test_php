@@ -8,13 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品追加確認</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
-	<link rel="stylesheet" href="../css/pro_add.css">
+	<?php require_once('../common/html/pro_style.php'); ?>
 	<script src="../common/js/common.js"></script>
 	<script>
 		(function () {
@@ -24,9 +18,12 @@
 </head>
 <body>
 	<?php
+		
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Product_db.php');
+
 	?>
 
 	<div class="main">
@@ -38,8 +35,8 @@
 				$pro_name = $post['name'];
 				$pro_price = $post['price'];
 				$pro_cate = $post['category'];
-				$pro_file_name = $_FILES['pro_img']['name'];
-				$pro_file_tmp = $_FILES['pro_img']['tmp_name'];
+				$pro_file_name = $_FILES['pro_img_file']['name'];
+				$pro_file_tmp = $_FILES['pro_img_file']['tmp_name'];
 			
 				$pro_file_path = getUpFileTmpName($pro_file_name);
 				$pro_img_dir = getUpFileDir('product');
@@ -61,11 +58,15 @@
 					print checkGamenDispField('価格：　' . $pro_price);
 				}
 
-				if (preg_match('/^\d+$/', $pro_cate) == 0) {
-					print checkGamenDispFieldError('価格が正しく入力されていません');
-					$ok_flag = false;
-				} else {
-					print checkGamenDispField('カテゴリー：　' . $pro_cate);
+				if ($pro_cate) {
+					$pro_db = new Product_db();
+					$category = $pro_db->get_category($pro_cate);
+					if ($category) {
+						print checkGamenDispField('カテゴリー　：　' . $category['text']);		
+					} else {
+						print checkGamenDispFieldError('カテゴリーの値が不正です');
+						$ok_flag = false;
+					}
 				}
 
 				if (is_uploaded_file($pro_file_tmp)) {

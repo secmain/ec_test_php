@@ -14,12 +14,16 @@
 		
 		//CSV文字列生成
 	    $csvstr = "";
+	    foreach ($recs as $i => $rec) {
+	    	$csvstr .= implode($rec, ',') . "\n";
+	    }
+		/*
 		foreach ($recs as $i => $rec) {
 			$csvstr .= $rec['code'] . ",";
 			$csvstr .= $rec['name'] . ",";
 		    $csvstr .= $rec['prof_file_name'] . "\n";
 		}
-	 
+		*/
 	    //CSV出力
 	    $fileNm = sprintf('kaiins.csv');
 	    header('Content-Type: text/csv');

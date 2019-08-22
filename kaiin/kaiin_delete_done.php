@@ -1,52 +1,59 @@
 <?php
 	session_start();
 	session_regenerate_id(true);
-	if (isset($_SESSION['login']) == false) {
-		print 'ログインされていません。';
-		print '<a href="../kaiin_login/kaiin_login.html">ログイン画面へ</a>';
-		exit();
-	} else {
-		print $_SESSION['kaiin_name'];
-		print 'さんログイン中<br>';
-		print '<br>';
-	}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<title>	</title>
+	<title>会員削除完了</title>
+	<form action="kaiin_delete_done.php" method="post">
+				<!-- (A) -->
+				<input type="hidden" name="code" value="<?php print $kaiin_code; ?>">
+				<input type="hidden" name="name" value="<?php print $kaiin_name; ?>">
+				<input type="button" class="btn" onclick="history.back()" value="戻る">
+				<input type="submit" class="btn" value="OK">
+			</form>
 </head>
 <body>
+	
+	<?php
+		require_once('../common/html/kaiin_header.php');
+		require_once('../common/html/kaiin_navi.php');
+		require_once('../common/common.php');
+		require_once('../class/Kaiin_db.php');
+	?>
 
-<?php
-		try {
+	<div class="main" class="clear-fix">
+		<div class="main-container">
+			<h3 class="main-title">会員削除完了</h3>
+			<?php
+				try {
 
-			$kaiin_code = $_POST['code'];
-			// ここでサニタイジング
-			// $kaiin_code = htmlspecialchars($kaiin_code);
+					$kaiin_code = $_POST['code'];
+					// ここでサニタイジング
+					// $kaiin_code = htmlspecialchars($kaiin_code);
 
-			$dsn = 'mysql:dbname=ec_test_php;host=localhost;';
-			$user = 'an';
-			$password = 'password';
-			$db = new PDO($dsn, $user, $password);
-			$db->query('set names utf8');
+					$kaiin_db = new Kaiin_db();
 
-			$sql = 'delete from mst_tbl where code=?';
-			$stmt = $db->prepare($sql);
-			$data[] = $kaiin_code;
+					$kaiin_db->delete_kaiin($kaiin_code);
+					
+					unset($kaiin_db);
 
-			$stmt->execute($data);
+					print checkGamenDispField('会員コード：' . $kaiin_code . 'を削除しました');
 
-			$db = null;
-
-			print $kaiin_code . 'を削除しました <br>';
-
-		} catch (Exception $e) {
-			print 'system error!!';
-			exit();
-		}
-?>
+				} catch (Exception $e) {
+					print 'system error!!';
+					exit();
+				}
+			?>
+			<form action="kaiin_list.php" method="get">
+				<input type="submit" class="btn" value="会員一覧へ">
+			</form>
+		</div>
+		<?php require_once '../common/html/kaiin_side.php'; ?>
+	</div>
+	<?php require_once '../common/html/footer.php'; ?>
 </body>
 </html>

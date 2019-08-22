@@ -1,65 +1,82 @@
 <?php
 	session_start();
 	session_regenerate_id(true);
-	if (isset($_SESSION['login']) == false) {
-		print 'ログインされていません。';
-		print '<a href="../kaiin_login/kaiin_login.html">ログイン画面へ</a>';
-		exit();
-	} else {
-		print $_SESSION['kaiin_name'];
-		print 'さんログイン中<br>';
-		print '<br>';
-	}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<title>	</title>
+	<title>会員削除</title>
+	<?php require_once('../common/html/kaiin_style.php'); ?>
+	<link rel="stylesheet" href="../css/kaiin_edit.css">
 </head>
 <body>
-<?php
-		try {
+	
+	<?php
+		require_once('../common/html/kaiin_header.php');
+		require_once('../common/html/kaiin_navi.php');
+		require_once('../common/common.php');
+		require_once('../class/Kaiin_db.php');
+	?>
 
-			$kaiin_code = $_GET['kaiin_code'];
-			//　ここでサニタイジング必要(A)
-			// $kaiin_code = htmlspecialchars($kaiin_code);
+	<div class="main" class="clear-fix">
+		<div class="main-container">
+			<h3 class="main-title">会員削除</h3>
+			<?php
+				try {
 
-			$dsn = 'mysql:dbname=ec_test_php;host=localhost;';
-			$user = 'an';
-			$password = 'password';
-			$db = new PDO($dsn, $user, $password);
-			$db->query('set names utf8');
+					$kaiin_code = $_GET['kaiin_code'];
+					//　ここでサニタイジング必要(A)
+					// $kaiin_code = htmlspecialchars($kaiin_code);
+					$kaiin_db = new Kaiin_db();
 
-			$sql = 'select code, name from mst_tbl where code = ?';
-			$stmt = $db->prepare($sql);
-			$data = [$kaiin_code];
-			$stmt->execute($data);
+					$rec = $kaiin_db->get_kaiin($kaiin_code);
+					
+					unset($kaiin_db);
 
-			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-			$kaiin_name = $rec['name'];
+					$kaiin_name = $rec['name'];
+					$kaiin_file_name = $rec['prof_file_name'];
+					$kaiin_file_path = $rec['prof_file_path'];
+					$kaiin_img_dir = getUpFileDir('kaiin');
 
-			$db = null;
-
-		} catch (Exception $e) {
-				print 'system error !!!';
-				print $e;
-				exit();
-		} 
-?>
-		スタッフ削除<br>
-		<!-- (A) -->
-		スタッフコード：<br><?php print $kaiin_code; ?><br>
-		スタッフ名：<br><?php print $kaiin_name; ?><br>
-		このスタッフを削除してもよろしいですか？<br>
-		<form action="kaiin_delete_done.php" method="post">
+				} catch (Exception $e) {
+						print 'system error !!!';
+						print $e;
+						exit();
+				} 
+			?>
+			
 			<!-- (A) -->
-			<input type="hidden" name="code" value="<?php print $kaiin_code; ?>">
-			<input type="hidden" name="name" value="<?php print $kaiin_name; ?>">
-			<input type="button" onclick="history.back()" value="戻る">
-			<input type="submit" value="OK">
-		</form>
-
+			<div>このを削除してもよろしいですか？</div><br>
+			<table class="form-table">				
+				<tr>
+					<th>会員コード：</th>
+					<td><?php print $kaiin_code; ?><br></td>
+				</tr>
+				<tr>
+					<th>名前：</th>
+					<td><?php print $kaiin_name; ?><br></td>
+				</tr>
+				<tr>
+					<th>画像：<br></th>
+					<td>
+						<img src="<?php print $kaiin_img_dir . basename($kaiin_file_path); ?>" class="my-profile" onerror="this.src='../up_img/no-image.jpg'" alt="<?php print $kaiin_file_name; ?>">
+					</td>
+				</tr>
+			</table>
+			<br>
+			
+			<form action="kaiin_delete_done.php" method="post">
+				<!-- (A) -->
+				<input type="hidden" name="code" value="<?php print $kaiin_code; ?>">
+				<input type="hidden" name="name" value="<?php print $kaiin_name; ?>">
+				<input type="button" class="btn" onclick="history.back()" value="戻る">
+				<input type="submit" class="btn" value="OK">
+			</form>
+			</div>
+		<?php require_once '../common/html/kaiin_side.php'; ?>
+	</div>
+	<?php require_once '../common/html/footer.php'; ?>
 </body>
 </html>

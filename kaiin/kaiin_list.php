@@ -32,10 +32,18 @@
 
 			$recs = $kaiin_db->get_kaiins();
 
+			unset($kaiin_db);
+
+			$my_img_dir = getUpFileDir('mypage');
+
 			foreach ($recs as $i => $rec) {
+				
+				$kaiin_file_name = $rec['prof_file_name'];
+				$kaiin_file_path = $rec['prof_file_path'];
+
 				print '<label>';
 				print '<div class="kaiin-box">';
-				print '<img src="' . $my_img_dir . basename($kaiin_file_name) . '" class="kaiin-image" onerror="this.src=\'../up_img/no-image.jpg\'" alt="' . $kaiin_file_name . '"><br>';
+				print '<img src="' . $my_img_dir . basename($kaiin_file_path) . '" class="kaiin-image" onerror="this.src=\'../up_img/no-image.jpg\'" alt="' . $kaiin_file_name . '"><br>';
 				print '<input type="radio" name="kaiin_code" value="' . $rec['code'] . '" id ="' . $rec['code'] . '">';
 				print $rec['name'];
 				print '</div>';

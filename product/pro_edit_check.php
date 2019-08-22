@@ -8,12 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品編集確認</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/pro_style.php'); ?>
 	<link rel="stylesheet" href="../css/pro_edit.css">
 	<script src="../common/js/common.js"></script>
 	<script>
@@ -27,6 +22,7 @@
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Product_db.php');
 	?>
 
 	<div class="main">
@@ -34,18 +30,19 @@
 			<h3 class="main-title">商品編集確認</h3>
 
 			<?php
-				$pro_code = $_POST['code'];
-				$pro_name = $_POST['name'];
-				$pro_price = $_POST['price'];
+				$post = sanitize($_POST);
+				$pro_code = $post['code'];
+				$pro_name = $post['name'];
+				$pro_price = $post['price'];
+				$pro_cate = $post['category'];
 				$pro_file_name = $_FILES['pro_img_file']['name'];
 				$pro_file_tmp = $_FILES['pro_img_file']['tmp_name'];
 				$pro_file_path = getUpFileTmpName($_FILES['pro_img_file']['name']);
 
-				$pro_code = h($pro_code);
-				$pro_name = h($pro_name);
-				$pro_price = h($pro_price);
 				$pro_file_name = h($pro_file_name);
 				$pro_img_dir = getUpFileDir('product');
+
+				$pro_db = null;
 
 				$ok_flag = true;
 				$file_flag = false;
@@ -71,6 +68,17 @@
 					print checkGamenDispField('価格：　' . $pro_price . '円');
 				}
 
+				if ($pro_cate) {
+					$pro_db = new Product_db();
+					$category = $pro_db->get_category($pro_cate);
+					if ($category) {
+						print checkGamenDispField('カテゴリー　：　' . $category['text']);		
+					} else {
+						print checkGamenDispFieldError('カテゴリーの値が不正です');
+						$ok_flag = false;
+					}
+				}
+
 				if (is_uploaded_file($pro_file_tmp)) {
 					$file_flag = true;
 				}
@@ -89,11 +97,13 @@
 					print '</form>';
 				} else {
 					print '<form method="post" action="pro_edit_done.php">';
-					$_SESSION['pro_code'] = $pro_code;
-					$_SESSION['pro_name'] = $pro_name;
-					$_SESSION['pro_price'] = $pro_price;
-					$_SESSION['pro_file_name'] = $pro_file_name;
-					$_SESSION['pro_file_path'] = $pro_file_path;
+					$inputs['pro_code'] = $pro_code;
+					$inputs['pro_name'] = $pro_name;
+					$inputs['pro_price'] = $pro_price;
+					$inputs['pro_cate'] = $pro_cate;
+					$inputs['pro_file_name'] = $pro_file_name;
+					$inputs['pro_file_path'] = $pro_file_path;
+					$_SESSION['product_inputs'] = $inputs;
 					print '<input type="hidden" id="url" value="' . $pro_img_dir . $pro_file_path . '">';
 					print '<input type="button" onclick="history.back()" value="戻る" class="btn">';
 					print '<input type="submit" value="OK" class="btn">';

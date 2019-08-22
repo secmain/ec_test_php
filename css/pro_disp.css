@@ -1,16 +1,5 @@
 @charset "utf-8";
 
-.main-container {
-	float: left;
-	width: 80%;
-	margin: 0 auto;
-	text-align: center;	
-}
-
-.main-title {
-	margin-bottom: 0px;
-}
-
 .form-table {
 	width: 60%;
 	text-align: center;

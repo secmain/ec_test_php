@@ -5,10 +5,11 @@
 	<title>会員ログイン</title>
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/login.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 </head>
 <body>
 	<?php
-		require_once('../common/html/header.php');
+		require_once('../common/html/kaiin_header.php');
 		require_once('../common/common.php');
 	?>
 	<div class="main">

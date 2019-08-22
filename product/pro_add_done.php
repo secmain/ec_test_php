@@ -8,13 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品追加完了</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
-	<link rel="stylesheet" href="../css/pro_add.css">
+	<?php require_once('../common/html/pro_style.php'); ?>
 </head>
 <body>
 
@@ -22,6 +16,7 @@
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Product_db.php');
 	?>
 
 	<div class="main">
@@ -35,18 +30,21 @@
 					$file_name = $_POST['pro_file_name'];
 					$file_path = $_POST['pro_file_path'];
 					
-					$db = connect_db();
-					$db->query('set names utf8');
+					$pro_db = new Product_db();
 
-					$sql = 'insert into mst_product(name, price, file_name, file_path, category) values(?, ?, ?, ?, ?)';
-					$stmt = $db->prepare($sql);
-					$data = [$pro_name, $pro_price, $file_name, $file_path, $pro_cate];
+					$data = [
+						'name' => $pro_name,
+						'price' => $pro_price,
+						'file_name' => $file_name,
+						'file_path' => $file_path,
+						'category' => $pro_cate
+					];
 				
-					$stmt->execute($data);
+					$pro_db->add_product($data);
 
-					$db = null;
+					unset($pro_db);
 
-					print $pro_name . 'を追加しました';
+					print checkGamenDispField($pro_name . 'を追加しました');
 
 				} catch (Exception $e) {
 					print 'system error!!';

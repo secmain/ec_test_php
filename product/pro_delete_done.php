@@ -8,20 +8,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品削除完了</title>
-	<link href="../common/css/font-awesome/css/all.css" rel="stylesheet"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/common.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
-	<link rel="stylesheet" href="../css/pro_delete.css">
+	<?php require_once('../common/html/pro_style.php'); ?>
 </head>
 <body>
+
 	<?php
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Product_db.php');
 	?>
 
 	<div class="main">
@@ -39,23 +34,17 @@
 							$pro_pass = htmlspecialchars($pro_pass);
 						*/
 
-						$db = connect_db();
-						$db->query('set names utf8');
+						$pro_db = new Product_db();
 
-						$sql = 'delete from mst_product where code=?';
-						$stmt = $db->prepare($sql);
-						$data[] = $pro_code;
+						$pro_db->delete_product($pro_code);
 
-						$stmt->execute($data);
+						unset($pro_db);
 
-						$db = null;
-
-						print $pro_name . 'を削除しました <br>';
+						print checkGamenDispField($pro_name . 'を削除しました');
 
 					} catch (Exception $e) {
 						print 'system error!!';
 						exit();
-
 					}
 				?>
 			</div>

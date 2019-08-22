@@ -1,4 +1,12 @@
 <?php
+	
+	require_once(dirname(__FILE__) . '/../vendor/autoload.php');
+
+	function get_env($name) {
+		$dotenv = Dotenv\Dotenv::create(__DIR__ . '/..');
+		$dotenv->load();
+		return getenv($name);
+	}
 
 	function connect_db() {
 		$dsn = 'mysql:dbname=ec_test_php;host=localhost;';
@@ -84,8 +92,13 @@
 				  // myページ編集
 				  $mise_dir . 'mise_edit_mypage.php' => ['name' => 'myページ編集', 'parent' => $mise_dir . 'mise_list.php'],
 				 ],
-			2 => [$kaiin_dir . 'kaiin_edit.php' => ['name' => '会員編集', 'parent' => $kaiin_dir . 'kaiin_list.php'],
+			2 => [
+				  // 会員追加
+				  $kaiin_dir . 'kaiin_add.php' => ['name' => '会員追加', 'parent' => $kaiin_dir . 'kaiin_list.php'],
+				  $kaiin_dir . 'kaiin_edit.php' => ['name' => '会員編集', 'parent' => $kaiin_dir . 'kaiin_list.php'],
 				  $kaiin_dir . 'kaiin_disp.php' => ['name' => '会員参照', 'parent' => $kaiin_dir . 'kaiin_list.php'],
+				  // 会員削除
+				  $kaiin_dir . 'kaiin_delete.php' => ['name' => '会員削除', 'parent' => $kaiin_dir . 'kaiin_list.php'],
 				  $mypage_dir . 'kaiin_edit_mypage_check.php' => ['name' => 'myページ編集確認', 'parent' => $mypage_dir . 'kaiin_edit_mypage.php'],
 				  // パスワード変更
 				  $mypage_dir . 'kaiin_password_change.php' => ['name' => 'pw変更', 'parent' => $mypage_dir . 'kaiin_edit_mypage.php'],
@@ -101,8 +114,13 @@
 				  // myページ編集確認
 				  $mise_dir . 'mise_edit_mypage_check.php' => ['name' => 'myページ編集確認', 'parent' => $mise_dir . 'mise_edit_mypage.php'],
 				],
-			3 => [$kaiin_dir . 'kaiin_edit_check.php' => ['name' => '会員編集確認', 'parent' => $kaiin_dir . 'kaiin_edit.php'],
+			3 => [
+				  // 会員追加確認
+				  $kaiin_dir . 'kaiin_add_check.php' => ['name' => '会員追加確認', 'parent' => $kaiin_dir . 'kaiin_add.php'],	
+				  $kaiin_dir . 'kaiin_edit_check.php' => ['name' => '会員編集確認', 'parent' => $kaiin_dir . 'kaiin_edit.php'],
 				  $kaiin_dir . 'kaiin_add_check.php' => ['name' => '会員追加確認', 'parent' => $kaiin_dir . 'kaiin_add.php'],
+				  // 会員削除確認
+				  $kaiin_dir . 'kaiin_delete_done.php' => ['name' => '会員削除完了', 'parent' => $kaiin_dir . 'kaiin_delete.php'],	
 				  $mypage_dir . 'kaiin_edit_mypage_done.php' => ['name' => 'myページ編集完了', 'parent' => $mypage_dir . 'kaiin_edit_mypage_check.php'],
 				  // パスワード変更確認
 				  $mypage_dir . 'kaiin_password_change_check.php' => ['name' => 'pw変更確認', 'parent' => $mypage_dir . 'kaiin_password_change.php'],
@@ -116,7 +134,10 @@
 				  // myページ編集完了
 				  $mise_dir . 'mise_edit_mypage_done.php' => ['name' => 'myページ編集完了', 'parent' => $mise_dir . 'mise_edit_mypage_check.php'],
 				],
-			4 => [$kaiin_dir . 'kaiin_edit_done.php' => ['name' => '会員編集完了', 'parent' => $kaiin_dir . 'kaiin_edit_check.php'],
+			4 => [
+				  // 会員追加完了
+				  $kaiin_dir . 'kaiin_add_done.php' => ['name' => '会員追加完了', 'parent' => $kaiin_dir . 'kaiin_add_check.php'],
+				  $kaiin_dir . 'kaiin_edit_done.php' => ['name' => '会員編集完了', 'parent' => $kaiin_dir . 'kaiin_edit_check.php'],
 				  $product_dir . 'pro_edit_done.php' => ['name' => '商品編集完了', 'parent' => $product_dir . 'pro_edit_check.php'],
 				  $product_dir . 'pro_add_done.php' => ['name' => '商品追加完了', 'parent' => $product_dir . 'pro_add_check.php'],
 				  // パスワード変更完了

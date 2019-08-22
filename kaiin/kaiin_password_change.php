@@ -8,13 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>パスワード変更</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
-	<link rel="stylesheet" href="../css/mypage.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 </head>
 <body>
 	<?php

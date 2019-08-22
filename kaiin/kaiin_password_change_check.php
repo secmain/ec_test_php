@@ -8,13 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>パスワード変更確認</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
-	<link rel="stylesheet" href="../css/mypage.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 </head>
 <body>
 	<?php
@@ -28,12 +22,10 @@
 			<h3 class="main-title">パスワード変更確認</h3><br>
 
 			<?php
-			$kaiin_pass1 = $_POST['password1'];
-			$kaiin_pass2 = $_POST['password2'];
 
-			$kaiin_pass1 = htmlspecialchars($kaiin_pass1);
-			$kaiin_pass2 = htmlspecialchars($kaiin_pass2);
-			//
+			$post = sanitize($_POST);
+			$kaiin_pass1 = $post['password1'];
+			$kaiin_pass2 = $post['password2'];
 
 			$ok_flag = true;
 
@@ -47,7 +39,7 @@
 
 			if (!$ok_flag) {
 				print '<form>';
-				print '<input type="button" onclick="history.back()" value="戻る">';
+				print '<input type="button" class="btn" onclick="history.back()" value="戻る">';
 				print '</form>';
 			} else {
 				// 後でハッシュの方式変える

@@ -7,13 +7,7 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<link href="../common/css/font-awesome/css/all.css" rel="stylesheet"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/common.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 	<link rel="stylesheet" href="../css/kaiin_add.css">
 	<script src="../common/js/common.js"></script>
 	<script>
@@ -69,11 +63,13 @@
 			}
 
 			// 管理者区分選択のチェック
+			/*
 			$kanri_kubuns = getKanrikubun();
 			if (!isset($kanri_kubuns[$kanri])) {
 				print checkGamenDispFieldError('管理区分に不正な値が入力されました。');
 				$ok_flag = false;
 			}
+			*/
 
 			// アップロードファイルの処理
 			if (is_uploaded_file($tmp_file)) {
@@ -100,10 +96,11 @@
 				$kaiin_obj = [];
 				$kaiin_obj['name'] = $kaiin_name;
 				$kaiin_obj['password'] = $kaiin_pass;
-				$kaiin_obj['kanri'] = $kanri;
+				// 廃止
+				// $kaiin_obj['kanri'] = $kanri;
 				$kaiin_obj['prof_file_name'] = $prof_file_name;
 				$kaiin_obj['prof_file_path'] = $prof_file_path;
-				$_SESSION['kaiin_obj'] = $kaiin_obj;
+				$_SESSION['kaiin_add'] = $kaiin_obj;
 				print 'この内容で登録しますか？';
 				print '<form method="post" action="kaiin_add_done.php">';
 				print '<input type="hidden" id="url" value="' . $pro_img_dir . $pro_file_path . '">';

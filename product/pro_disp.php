@@ -8,12 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品参照</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/pro_style.php'); ?>
 	<link rel="stylesheet" href="../css/pro_disp.css">
 </head>
 <body>
@@ -21,6 +16,7 @@
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Product_db.php');
 	?>
 	<div class="main">
 		<div class="main-container">
@@ -33,22 +29,16 @@
 					//　ここでサニタイジング
 					// $pro_code = htmlspecialchars($pro_code);
 
-					$db = connect_db();
-					$db->query('set names utf8');
+					$pro_db = new Product_db();
 
-					$sql = 'select code, name, price, file_name, file_path from mst_product where code = ?';
-					$stmt = $db->prepare($sql);
-					$data = [$pro_code];
-					$stmt->execute($data);
-
-					$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+					$rec = $pro_db->get_product($pro_code);
 					$pro_name = $rec['name'];
 					$pro_price = $rec['price'];
 					$pro_file_name = $rec['file_name'];
 					$pro_file_path = $rec['file_path'];
 					$up_img_dir = getUpFileDir('product');
 
-					$db = null;
+					unset($pro_db);
 
 				} catch (Exception $e) {
 						print 'system error !!!';
@@ -73,7 +63,7 @@
 				<tr>
 					<th>画像：<br></th>
 					<td>
-						<img src="<?php print $pro_img_dir . basename($pro_file_path); ?>" class="pro-img-file" onerror="this.src='../up_img/no-image.jpg'"><br>
+						<img src="<?php print $up_img_dir . basename($pro_file_path); ?>" class="pro-img-file" onerror="this.src='../up_img/no-image.jpg'"><br>
 					</td>
 				</tr>
 			</table>

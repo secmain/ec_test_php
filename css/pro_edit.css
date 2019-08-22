@@ -1,19 +1,9 @@
 @charset "utf-8";
 
-.main-container {
-	float: left;
-	width: 80%;
-	margin: 0 auto;
-	text-align: center;	
-}
-
-.main-title {
-	margin-bottom: 0px;
-}
-
 .form-table {
-	width: 90%;
+	width: 60%;
 	text-align: center;
+  margin: 0 auto;
 	margin-bottom: 10px;
 }
 
@@ -47,14 +37,6 @@
 .my-img-file {
   display: block;
   margin: 0 auto;
-  width: 80%;
+  width: 60%;
   height: 200px; 
-}
-
-.image-zone {
-  width: 200px;
-  height: 200px;
-  background-size: contain;
-  overflow: hidden;
-  margin: 0 auto;  
 }

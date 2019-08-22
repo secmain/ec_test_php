@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-if (isset($_SESSION['login']) == false) {
+if (!isset($_SESSION['kaiin']) || $_SESSION['kaiin']['login'] != 1) {
 	print 'ログインされていません。';
 	print '<a href="../kaiin_login/kaiin_login.html">ログイン画面へ</a>';
 	exit();

@@ -12,19 +12,14 @@ class Kaiin_db {
 	}
 
 	function get_kaiins() {
-		$sql = 'select code, name, prof_file_name, prof_file_path from mst_tbl';
+		// $sql = 'select code, name, prof_file_name, prof_file_path from mst_tbl';
+		$sql = 'select * from mst_tbl';
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute();
 
 		$ret = [];
-		$i = 0;
 		while ($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$ret[$i++] = [
-				'code' => $rec['code'],
-				'name' => $rec['name'],
-				'prof_file_name' => $rec['prof_file_name'],
-				'prof_file_path' => $rec['prof_file_path'],
-			];
+			$ret[] = $rec;
 		}
 
 		return $ret;
@@ -91,6 +86,20 @@ class Kaiin_db {
 		return $ret;
 	}
 
+	function add_kaiin($params) {
+		$sql = 'insert into mst_tbl(name, password, prof_file_name, prof_file_path) values(?,?,?,?)';
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute($params);
+	}
+
+	function delete_kaiin($id) {
+		$sql = 'delete from mst_tbl where code=?';
+		$data = [$id];
+		$stmt = $this->db->prepare($sql);
+		
+		return $stmt->execute($data);
+	}
+
 	function up_kaiin($id, $params) {
 		$data = [];
 		$columns = [
@@ -106,10 +115,15 @@ class Kaiin_db {
 			}
 		}
 		$data[] = $id;
-		var_dump($data);
 		$sql = 'update mst_tbl set name=?, prof_file_name=?, prof_file_path=? where code=?';
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute($data);		
+	}
+
+	function chpwd_kaiin($id, $pwd) {
+		$sql = 'update mst_tbl set password=? where code=?';
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute([$pwd, $id]);		
 	}
 
 	function __destruct() {

@@ -8,12 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品NG画面</title>
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
-	<link rel="stylesheet" href="../css/pro_add.css">
+	<?php require_once('../common/html/pro_style.php'); ?>
 </head>
 <body>
 	<?php
@@ -23,10 +18,11 @@
 	?>
 	<div class="main">
 		<div class="main-container">
-			<div>商品が選択されていません。</div>
+			<h3 class="main-title">商品が選択されていません。</h3>
 			<a href="pro_list.php" class="btn">戻る</a> 
 		</div>		
 		<?php require_once('../common/html/kaiin_side.php'); ?>
 	</div>
+	<?php require_once('../common/html/footer.php'); ?>
 </body>
 </html>

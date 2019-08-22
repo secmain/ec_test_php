@@ -8,12 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品編集入力</title>
-	<link rel="stylesheet" href="../common/css/font-awesome/css/all.css"> 
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../common/css/kaiin_header.css">
-	<link rel="stylesheet" href="../common/css/footer.css">
-	<link rel="stylesheet" href="../common/css/kaiin_navi.css">
-	<link rel="stylesheet" href="../common/css/kaiin_side.css">
+	<?php require_once('../common/html/pro_style.php'); ?>
 	<link rel="stylesheet" href="../css/pro_edit.css">
 </head>
 <body>
@@ -21,6 +16,7 @@
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Product_db.php');
 	?>
 
 	<div class="main">
@@ -33,23 +29,19 @@
 					//　ここでサニタイジング
 					// $pro_code = h($pro_code);
 
-					$db = connect_db();
-					$db->query('set names utf8');
+					$pro_db = new Product_db();
 
-					$sql = 'select code, name, price, file_name, file_path from mst_product where code = ?';
-					$stmt = $db->prepare($sql);
-					$data = [$pro_code];
-					$stmt->execute($data);
+					$rec = $pro_db->get_product($pro_code);
+					$categorys = $pro_db->get_categorys();
 
-					$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-
-					// 存在しないコードの場合もありえる
+					// 存在しないコードの場合もありえる(いらない?)
 					if (!$rec) {
 						print checkGamenDispFieldError('対象の商品が見つかりませんでした。');
 						exit();
 					}
 					$pro_name = $rec['name'];
 					$pro_price = $rec['price'];
+					$pro_category = $rec['category'];
 					// xssの可能性あり
 					$pro_file_path = $rec['file_path'];
 
@@ -63,7 +55,7 @@
 
 					$pro_img_dir = getUpFileDir('product');
 
-					$db = null;
+					unset($pro_db);
 
 				} catch (Exception $e) {
 						print 'system error !!!';
@@ -90,7 +82,25 @@
 					</tr>
 					<tr>
 						<th>カテゴリー：</th>
-						<td><input type="text" name="category" value="<?php print $category; ?>"><br><br></td>
+						<td>
+							<select name="category">
+								<option value="0"></option>
+								<?php
+									foreach ($categorys as $i => $category) {
+										$selected = '';
+										if ($category['id'] == $pro_category) {
+											$selected = 'selected';
+										}
+										print sprintf(
+											'<option value="%s" %s>%s</option>',
+											$category['id'],
+											$selected,
+											$category['text']
+										);										
+									}
+								?>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th>画像：<br></th>
