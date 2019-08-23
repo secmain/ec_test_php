@@ -27,13 +27,28 @@
 			<?php
 				try {
 
+					// 認可制御の脆弱性のため
+					// $kaiin_code = $kaiin['kaiin_code'];
+					$kaiin_code = $_GET['kaiin_code'];
+
 					$pro_code = $_GET['pro_code'];
+
 					//　ここでサニタイジング
 					$pro_code = h($pro_code);
 
 					$pro_db = new Product_db();
 
 					$rec = $pro_db->get_product($pro_code);
+
+					// 存在しないコードの場合もありえる(いらない?)
+					if (!$rec) {
+						print checkGamenDispFieldError('対象の商品が見つかりませんでした。');
+						exit();
+					// ユーザによる振り分け追加（脆弱性あり）
+					} else if ($rec['kaiin_code'] != $kaiin_code) {
+						print checkGamenDispFieldError('作成者以外削除することはできません。');
+						exit();
+					}
 					
 					// エスケープせず
 					$pro_name = $rec['name'];
@@ -41,6 +56,8 @@
 					$pro_file_name = $rec['file_name'];
 					$pro_file_path = $rec['file_path'];
 					$pro_img_dir = getUpFileDir('product');
+
+					$_SESSION['product_delete'] = $pro_code;
 
 					unset($pro_db);
 
@@ -77,7 +94,6 @@
 						</td>
 					</tr>
 				</table>
-				<input type="hidden" name="code" value="<?php print $pro_code; ?>">
 				<input type="hidden" name="name" value="<?php print $pro_name; ?>">
 				<input type="button" onclick="history.back()" value="戻る" class="btn">
 				<input type="submit" value="OK" class="btn">

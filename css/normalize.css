@@ -45,6 +45,11 @@ a:link, a:visited, a:hover, a:active {
 	letter-spacing: 1px;
 	overflow-x: hidden;
 	overflow-y: hidden;
+	color: black;
+}
+
+.btn.middle {
+	width: 150px;
 }
 
 .btn:hover {

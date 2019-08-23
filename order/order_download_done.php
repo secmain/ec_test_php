@@ -16,12 +16,16 @@
 		require_once('../common/html/kaiin_header.php');
 		require_once('../common/html/kaiin_navi.php');
 		require_once('../common/common.php');
+		require_once('../class/Kaiin_db.php');
+
+		$kaiin = $_SESSION['kaiin'];
+		$file_name = $kaiin['kaiin_name'] . '_' . uniqid() . $kaiin['kaiin_code'] . '.csv';
 	?>
 	<div class="main">
 		<div class="main-container">
 			<h3 class="main-title">注文書ダウンロード</h3>
 			<br>
-			<a href="order.csv" class="btn">ダウンロード</a>
+			<a href="<?php print $file_name; ?>" class="btn middle">ダウンロード</a>
 			<a onclick="history.back()" class="btn">戻る</a>
 		</div>
 		<?php require_once('../common/html/kaiin_side.php'); ?>
@@ -34,7 +38,7 @@
 		$kaiin_db = new Kaiin_db();
 
 		$recs = $kaiin_db->get_kaiin_data($_POST['year'], $_POST['month'], $_POST['day']);
-		
+
 		/* 脆弱性をつくるためプリペアードステートメントは使わない
 		$stmt = $db->prepare($sql);
 		$data[] = $year;
@@ -75,9 +79,8 @@
 			$csv .= "\n";
 		}
 
-		$file = fopen('./order.csv', 'w');
+		$file = fopen('./' . $file_name, 'w');
 		$csv = mb_convert_encoding($csv, 'SJIS', 'UTF-8');
-		print nl2br($csv);
 		fputs($file, $csv);
 		fclose($file);
 

@@ -25,14 +25,11 @@
 
 				<?php
 					try {
-						$pro_code = $_POST['code'];
+						// $pro_code = $_POST['code'];
+						$pro_code = $_SESSION['product_delete'];
+						// $pro_name = h($_POST['name']);
 						$pro_name = $_POST['name'];
-						
-						/*
-							$pro_code = htmlspecialchars($pro_code);
-							$pro_name = htmlspecialchars($pro_name);
-							$pro_pass = htmlspecialchars($pro_pass);
-						*/
+
 
 						$pro_db = new Product_db();
 

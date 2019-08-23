@@ -65,14 +65,16 @@
 				print '<div class="product">';
 				print '<img src="' . $up_img_dir . $product['file_path'] . '" class="product-image" onerror="this.src=\'../up_img/no-image.jpg\'"><br>';
 				print '<input type="radio" name="pro_code" value="' . $product['code'] . '">';
-				print $product['name'] . '<br>';
-				print $product['price'] . '円<br>';
+				print $product['name'] . ' ';
+				print '[' . $product['price'] . '円]<br>';
+				print '作成者：　' . $product['kaiin_name'];
 				print '</div>';
 				print '</label>';
 			}
 
 	?>
 				</div>
+				<input type="hidden" name="kaiin_code" value="<?php print $_SESSION['kaiin']['kaiin_code']; ?>">
 				<input type="submit" name="add" value="追加" class="btn">
 				<input type="submit" name="disp" value="参照" class="btn">
 				<input type="submit" name="edit" value="修正" class="btn">

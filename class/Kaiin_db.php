@@ -61,8 +61,8 @@ class Kaiin_db {
 			ot.address,
 			ot.tel,
 			mp.name as mst_name,
+			mp.price,
 			opt.code_product,
-			opt.price,
 			opt.quantity
 		from
 			order_tbl ot,
@@ -78,6 +78,8 @@ class Kaiin_db {
 
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute();
+
+		// $stmt->debugDumpParams();
 
 		$ret = [];
 		while ($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {

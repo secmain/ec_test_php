@@ -30,6 +30,9 @@
 			$rec = $kaiin_db->get_kaiin($kaiin_code);
 
 			$kaiin_name = $rec['name'];
+			$kaiin_file_name = $rec['prof_file_name'];
+			$kaiin_file_path = $rec['prof_file_path'];
+			$up_img_dir = getUpFileDir('kaiin');
 
 			unset($kaiin_db);
 
@@ -56,10 +59,11 @@
 				<tr>
 					<th>画像：<br></th>
 					<td>
-						<img src="<?php print $my_img_dir . basename($my_file_path); ?>" class="my-img-file" onerror="this.src='../up_img/no-image.jpg'" alt="<?php print $my_file_name; ?>"><br>
+						<img src="<?php print $up_img_dir . basename($kaiin_file_path); ?>" class="kaiin-img-file" onerror="this.src='../up_img/no-image.jpg'" alt="<?php print $kaiin_file_name; ?>"><br>
 					</td>
 				</tr>
 			</table>
+			<button onclick="history.back()" class="btn">戻る</button>
 		</div>
 		<?php require_once '../common/html/kaiin_side.php'; ?>
 	</div>

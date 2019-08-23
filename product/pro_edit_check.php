@@ -31,7 +31,8 @@
 
 			<?php
 				$post = sanitize($_POST);
-				$pro_code = $post['code'];
+				// $pro_code = $post['code'];
+				$pro_code = $_SESSION['product_inputs']['code'];
 				$pro_name = $post['name'];
 				$pro_price = $post['price'];
 				$pro_cate = $post['category'];
@@ -97,13 +98,13 @@
 					print '</form>';
 				} else {
 					print '<form method="post" action="pro_edit_done.php">';
-					$inputs['pro_code'] = $pro_code;
-					$inputs['pro_name'] = $pro_name;
-					$inputs['pro_price'] = $pro_price;
-					$inputs['pro_cate'] = $pro_cate;
-					$inputs['pro_file_name'] = $pro_file_name;
-					$inputs['pro_file_path'] = $pro_file_path;
-					$_SESSION['product_inputs'] = $inputs;
+					$inputs['name'] = $pro_name;
+					$inputs['price'] = $pro_price;
+					$inputs['category'] = $pro_cate;
+					$inputs['file_name'] = $pro_file_name;
+					$inputs['file_path'] = $pro_file_path;
+					$old_product = $_SESSION['product_inputs'];
+					$_SESSION['product_inputs'] = array_merge($old_product, $inputs);
 					print '<input type="hidden" id="url" value="' . $pro_img_dir . $pro_file_path . '">';
 					print '<input type="button" onclick="history.back()" value="戻る" class="btn">';
 					print '<input type="submit" value="OK" class="btn">';

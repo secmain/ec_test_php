@@ -25,6 +25,6 @@
 		</form>
 	</div>
 
-	<?php require_once 'common/html/footer.php'; ?>
+	<?php require_once '../common/html/footer.php'; ?>
 </body>
 </html>

@@ -25,15 +25,19 @@
 			<?php
 				try {
 					$inputs = $_SESSION['product_inputs'];
-					$pro_code = $inputs['pro_code'];
+					
+					$pro_code = $inputs['code'];
+					/*
 					$pro_name = $inputs['pro_name'];
 					$pro_price = $inputs['pro_price'];
 					$pro_category = $inputs['pro_cate'];
 					$pro_file_name = $inputs['pro_file_name'];
 					$pro_file_path = $inputs['pro_file_path'];
+					*/
 					
 					$pro_db = new Product_db();
 
+					/*
 					$data = [
 						'name' => $pro_name,
 						'price' => $pro_price,
@@ -41,8 +45,10 @@
 						'file_path' => $pro_file_path,
 						'category' => $pro_category,
 					];
+					*/
 
-					$pro_db->up_product($pro_code, $data);
+					// $pro_db->up_product($pro_code, $data);
+					$pro_db->up_product($pro_code, $inputs);
 					
 					unset($pro_db);
 

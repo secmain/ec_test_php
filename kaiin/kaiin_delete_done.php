@@ -8,13 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>会員削除完了</title>
-	<form action="kaiin_delete_done.php" method="post">
-				<!-- (A) -->
-				<input type="hidden" name="code" value="<?php print $kaiin_code; ?>">
-				<input type="hidden" name="name" value="<?php print $kaiin_name; ?>">
-				<input type="button" class="btn" onclick="history.back()" value="戻る">
-				<input type="submit" class="btn" value="OK">
-			</form>
+	<?php require_once('../common/html/kaiin_style.php'); ?>
 </head>
 <body>
 	

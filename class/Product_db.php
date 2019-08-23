@@ -32,7 +32,7 @@ class Product_db {
 
 	function get_products($category = null) {
 		// SQLインジェクション脆弱性のため
-		$sql = 'select code, name, price, file_path from mst_product';
+		$sql = 'select mp.*, mt.name kaiin_name from mst_product mp left join mst_tbl mt on mp.kaiin_code = mt.code';
 		if ($category && intval($category)) {
 			$sql .= ' where category = ' . $category;
 		}
@@ -47,7 +47,7 @@ class Product_db {
 	}
 
 	function get_product($id) {
-		$sql = 'select * from mst_product where code = ?';
+		$sql = 'select mp.*, mt.name kaiin_name from mst_product mp left join mst_tbl mt on mp.kaiin_code = mt.code where mp.code = ?';
 		$data = [$id];
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute($data);

@@ -25,7 +25,13 @@
 			<?php
 				try {
 
+					$kaiin = $_SESSION['kaiin'];
+					// 認可制御の脆弱性のため
+					// $kaiin_code = $kaiin['kaiin_code'];
+					$kaiin_code = $_GET['kaiin_code'];
+
 					$pro_code = $_GET['pro_code'];
+
 					//　ここでサニタイジング
 					// $pro_code = h($pro_code);
 
@@ -38,7 +44,14 @@
 					if (!$rec) {
 						print checkGamenDispFieldError('対象の商品が見つかりませんでした。');
 						exit();
+					// ユーザによる振り分け追加（脆弱性あり）
+					} else if ($rec['kaiin_code'] != $kaiin_code) {
+						print checkGamenDispFieldError('作成者以外編集することはできません。');
+						exit();
 					}
+
+					$_SESSION['product_inputs'] = $rec;
+
 					$pro_name = $rec['name'];
 					$pro_price = $rec['price'];
 					$pro_category = $rec['category'];
