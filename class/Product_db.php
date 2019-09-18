@@ -9,6 +9,8 @@ class Product_db {
 	function __construct() {
 		$this->db = connect_db();
 		$this->db->query('set names utf8');
+		// エラー出力画面のため
+		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	}
 
 	function get_categorys() {
