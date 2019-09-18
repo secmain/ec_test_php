@@ -57,6 +57,12 @@
 						</td>
 					</tr>
 					<tr>
+						<th>説明：</th>
+						<td>
+							<textarea name="descript" cols="30" rows="5"></textarea>
+						</td>
+					</tr>
+					<tr>
 						<th>画像：<br></th>
 						<td>
 							<input type="file" name="pro_img_file" size="10" value="<?php print $pro_img_dir . $pro_file_path; ?>">
@@ -64,7 +70,17 @@
 					</tr>
 				</table>
 
+				<table class="form-table">				
+					<tr>
+						<th>xmlファイルで登録：<br></th>
+						<td>
+							<input type="file" name="up_xml_file" size="10">
+						</td>
+					</tr>
+				</table>
+
 				<input type="button" onclick="history.back()" value="戻る" class="btn">
+				<input type="button" onclick="location.href='sample_xml_download.php'" value="sample" class="btn">
 				<input type="submit" value="送信" class="btn">
 			</form>
 		</div>

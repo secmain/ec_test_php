@@ -31,15 +31,30 @@
 			<h3 class="main-title">商品追加確認</h3>
 			<?php
 
-				$post = sanitize($_POST);
-				$pro_name = $post['name'];
-				$pro_price = $post['price'];
-				$pro_cate = $post['category'];
+				$up_xml = $_FILES['up_xml_file']['tmp_name'];
+
 				$pro_file_name = $_FILES['pro_img_file']['name'];
 				$pro_file_tmp = $_FILES['pro_img_file']['tmp_name'];
-			
 				$pro_file_path = getUpFileTmpName($pro_file_name);
 				$pro_img_dir = getUpFileDir('product');
+				
+				// xmlファイルで登録の場合
+				if (is_uploaded_file($up_xml)) {
+					$doc = new DOMDocument();
+					$doc->substituteEntities = true;
+					$doc->load($up_xml);
+					$pro_name = h($doc->getElementsByTagName('name')->item(0)->textContent);
+					$pro_price = h($doc->getElementsByTagName('price')->item(0)->textContent);
+					$pro_cate = h($doc->getElementsByTagName('category')->item(0)->textContent);					
+					$pro_desc = h($doc->getElementsByTagName('descript')->item(0)->textContent);					
+				} else {
+					$post = sanitize($_POST);
+					$pro_name = $post['name'];
+					$pro_price = $post['price'];
+					$pro_cate = $post['category'];
+					$pro_desc = $post['descript'];
+				}
+
 
 				$ok_flag = true;
 				$file_flag = false;
@@ -67,6 +82,10 @@
 						print checkGamenDispFieldError('カテゴリーの値が不正です');
 						$ok_flag = false;
 					}
+				}
+
+				if ($pro_desc) {
+					print checkGamenDispField("カテゴリー　：\n" . $pro_desc);		
 				}
 
 				if (is_uploaded_file($pro_file_tmp)) {
