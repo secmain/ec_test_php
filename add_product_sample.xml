@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<product>
+	<!-- 商品名 -->
+	<name>sample name</name>
+	<!-- 価格 -->
+	<price>1000</price>
+	<!-- カテゴリーコード -->
+	<category>1</category>
+	<!-- 説明 -->
+	<descript>this test product</descript>
+</product>
