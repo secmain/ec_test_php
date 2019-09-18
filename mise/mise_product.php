@@ -64,7 +64,7 @@
 					</td>
 				</tr>
 			</table>
-			<input type="button" onclick="history.back()" value="戻る" class="btn">
+			<input type="button" onclick="location.href='mise_list.php'" value="戻る" class="btn">
 			<input type="button" onclick="location.href='mise_cartin.php?pro_code=<?php print $pro_code; ?>'" value="カートに入れる" class="btn">
 
 			<a name="keijiban"></a>
